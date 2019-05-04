@@ -12,13 +12,14 @@ mesh.colpointsmax = 10;
 %---------------------------------------------------%
 %--- Assemble Information into Problem Structure ---%
 %---------------------------------------------------%
+raceParams                        % load race parameters
 
 setup.name                        = 'Drone-Racing';
 setup.functions.continuous        = @droneContinous;
 setup.functions.endpoint          = @droneEndpoint;
 setup.bounds                      = bounds;
 setup.guess                       = guesses;
-%setup.auxdata                     = drone_params;
+setup.auxdata                    = droneParams;
 setup.mesh                        = mesh;
 setup.nlp.solver                  = 'ipopt';
 setup.derivatives.supplier        = 'sparseCD';
