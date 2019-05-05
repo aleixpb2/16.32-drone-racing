@@ -14,6 +14,10 @@ state_up = [1 1];
 intmin = -100;
 int_max = 100;
 
+
+z_min = 0;
+z_max = 100;
+
 for i_phase = 1:3
   bounds.phase(i_phase).initialtime.lower = tmin(i_phase);
   bounds.phase(i_phase).initialtime.upper = tmax(i_phase);
@@ -29,6 +33,9 @@ for i_phase = 1:3
   bounds.phase(i_phase).control.upper = umax;
   bounds.phase(i_phase).integral.lower = intmin;
   bounds.phase(i_phase).integral.upper = int_max;
+  
+  bounds.phase(iphase).path.lower  = 0;
+  bounds.phase(iphase).path.upper  = 100;
 end
 
 % bounds.phase(2).path.lower = 0;
