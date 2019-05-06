@@ -1,6 +1,11 @@
 % Parameters regarding the race (gates)
 
-gates.x = [0 1];
-gates.y = [0 0];
-gates.z = [4 4];
-gates.n = length(gates.x);
+gates(1).x = 0;
+gates(1).y = 0;
+gates(1).z = 4;
+
+gates(1).x = 1;
+gates(1).y = 0;
+gates(1).z = 4;
+
+n_gates = length(gates);

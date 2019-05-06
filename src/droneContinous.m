@@ -6,7 +6,7 @@ m      = input.auxdata.m;
 %t     = input.phase.time;
 
 % Dynamics
-for i_phase = 1:gates.n  % TODO: need to iterate?
+for i_phase = 1:n_gates  % TODO: need to iterate?
     
     %pos                    = input.phase(i_phase).state(:,1:3);
     vel                    = input.phase(i_phase).state(:,4:6);
@@ -29,13 +29,14 @@ for i_phase = 1:gates.n  % TODO: need to iterate?
     cpsi   = cos(psi);
     ttheta = tan(theta);
     
-    posdot      = vel;
-    veldot(1)   = -T./m.*(sphi.*spsi + cphi.*cpsi.*stheta);
-    veldot(2)   = -T./m.*(cphi.*spsi.*stheta - cpsi.*sphi);
-    veldot(3)   = g - T./m.*(cphi.*ctheta);
-    orientdot(1) = 
-    output(i_phase).dynamics   = [posdot, veldot, orientdot, ratedot];
-    output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
+    pos_dot      = vel;
+    vel_dot(1)   = -T./m.*(sphi.*spsi + cphi.*cpsi.*stheta);
+    vel_dot(2)   = -T./m.*(cphi.*spsi.*stheta - cpsi.*sphi);
+    vel_dot(3)   = g - T./m.*(cphi.*ctheta);
+    orient_dot(1) = 
     
-    % TODO: CONSTRAIN z >= 0
+    rate_dot(1) = 
+    
+    output(i_phase).dynamics   = [pos_dot, vel_dot, orient_dot, rate_dot];
+    output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
 end
