@@ -3,11 +3,12 @@ clear all; close all; clc
 %---------------------------------------------------%
 %- Provide Mesh Refinement Method and Initial Mesh -%
 %---------------------------------------------------%
-mesh.method = 'hp-PattersonRao';
-mesh.tolerance = 1e-3;
-mesh.maxiteration = 45;
-mesh.colpointsmin = 4;
-mesh.colpointsmax = 10;
+% Mesh is optional, comment for now
+% mesh.method = 'hp-PattersonRao';
+% mesh.tolerance = 1e-3;
+% mesh.maxiteration = 45;
+% mesh.colpointsmin = 4;
+% mesh.colpointsmax = 10;
 
 %---------------------------------------------------%
 %--- Assemble Information into Problem Structure ---%
