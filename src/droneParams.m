@@ -83,15 +83,14 @@ quad.rho = 1.184;                %   rho     Density of air                     
 quad.muv = 1.5e-5;               %   muv     Viscosity of air                    1x1
 
 % Airframe                 
-% Mambo
-quad.M = 0.063;                  %   M       Mass                                1x1
+quad.M = 0.8;                    %   M       Mass                                1x1
 
 % Ixx,yy,zz                     Flyer rotational inertia matrix     3x3
 % Mambo
-quad.J = [0.0000582857 0.0000716914 0.0001];
-quad.Ix = quad.J(1);
-quad.Iy = quad.J(2);
-quad.Iz = quad.J(3);
+%quad.J = [0.0000582857 0.0000716914 0.0001];
+quad.Ix = 0.02;
+quad.Iy = quad.Ix;
+quad.Iz = 0.15;
 
 quad.h = -(6.5+9.376)/1000;     %   h       Height of rotors above CoG          1x1
 quad.d = 0.0624;                %   d       Length of flyer arms                1x1
@@ -137,3 +136,6 @@ quadEDT.motors_max                  = 500;     %max command to control motors
 quadEDT.motorcommandToW2_gain       = 13840.8; %motor command for Rolling Spider (0-500) to motorspeed^2
 
 quadEDT.thrustToMotorcommand        = 1/(quadEDT.w2ToThrust_gain*quadEDT.motorcommandToW2_gain);
+
+% Aerodynamic constants
+quad.Axyz   = [0.1 0.1 0.001];

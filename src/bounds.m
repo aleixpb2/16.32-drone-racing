@@ -2,7 +2,7 @@ function bounds = bounds
 global gates n_gates
 
 t_min = 0;
-t_max = 60*5;  % s
+t_max = 60*2;  % s
 
 pos_min = ones(1, 3)*-100;
 pos_max = -pos_min;
@@ -34,19 +34,19 @@ rate_max = [p_max, q_max, r_max];
 
 % Input limits
 T_min = 0;
-T_max = 2.5;   % k*4*w^2
-tau_phi_min = -0.5;
-tau_phi_max = 0.5;
+T_max = 3.5;   % k*4*w^2
+tau_phi_min = -0.8;
+tau_phi_max = -tau_phi_min;
 tau_theta_min = tau_phi_min;
 tau_theta_max = tau_phi_max;
-tau_psi_min = -0.2;
-tau_psi_max = 0.2;
+tau_psi_min = -0.5;
+tau_psi_max = -tau_psi_min;
 
 u_min = [T_min, tau_phi_min, tau_theta_min, tau_psi_min];
 u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 
 % Path constraint
-z_min = 0;
+z_min = -100;  % TODO
 z_max = 100;
 
 for i_phase = 1:n_gates
