@@ -1,8 +1,8 @@
 function quad = droneParams
-
-%MDL_QUADCOPTER Dynamic parameters for a quadrotor.
+% Dynamic parameters for a quadrotor. Modified from a file on the
+% Robotics Toolbox for MATLAB (RTB) specifically for 16.32's project
 %
-% MDL_QUADCOPTER is a script creates the workspace variable quad which
+% Creates the workspace variable quad which
 % describes the dynamic characterstics of a quadrotor flying robot.
 %
 % Properties::
@@ -46,8 +46,6 @@ function quad = droneParams
 %   Australian National University, 2007.
 %   http://www.eng.yale.edu/pep5/P_Pounds_Thesis_2008.pdf
 % - This is a heavy lift quadrotor
-%
-% See also sl_quadrotor.
 
 % MODEL: quadrotor
 
@@ -84,17 +82,16 @@ quad.g = 9.81;                   %   g       Gravity                            
 quad.rho = 1.184;                %   rho     Density of air                      1x1
 quad.muv = 1.5e-5;               %   muv     Viscosity of air                    1x1
 
-% Airframe
-% Rolling spider
-% quad.M = 0.068;                 %   M       Mass                                1x1
+% Airframe                 
 % Mambo
-quad.M = 0.063; 
+quad.M = 0.063;                  %   M       Mass                                1x1
 
 % Ixx,yy,zz                     Flyer rotational inertia matrix     3x3
-% Roling spider
-% quad.J = diag([0.0686e-3 0.092e-3 0.1366e-3]);
 % Mambo
-quad.J = diag([0.0000582857 0.0000716914 0.0001]);
+quad.J = [0.0000582857 0.0000716914 0.0001];
+quad.Ix = quad.J(1);
+quad.Iy = quad.J(2);
+quad.Iz = quad.J(3);
 
 quad.h = -(6.5+9.376)/1000;     %   h       Height of rotors above CoG          1x1
 quad.d = 0.0624;                %   d       Length of flyer arms                1x1
@@ -133,78 +130,10 @@ quad.gamma = quad.rho*quad.a*quad.c*quad.r^4/(quad.Ib+quad.Ic);%   gamma   Lock 
 quad.b = quad.Ct*quad.rho*quad.A*quad.r^2;      %  T = b w^2
 quad.k = quad.Cq*quad.rho*quad.A*quad.r^3;      %  Q = k w^2
 
-quad.verbose = false;
-
 quadEDT.w2ToThrust_gain = quad.Ct*quad.rho*quad.A*quad.r^2;
 
-%% Motors
+% Motors
 quadEDT.motors_max                  = 500;     %max command to control motors    
 quadEDT.motorcommandToW2_gain       = 13840.8; %motor command for Rolling Spider (0-500) to motorspeed^2
 
 quadEDT.thrustToMotorcommand        = 1/(quadEDT.w2ToThrust_gain*quadEDT.motorcommandToW2_gain);
-
-
-%% Sensors
-%Noise on sensor readings
-quadEDT.noiseSensed_var       = diag([0.3 0.3 0.5 0.002 0.002 0.002 0.001 50]);
-
-%Delay (all sensor data)
-quadEDT.sensordelay                 = 1; %in samples of 200Hz;
-
-%Bias (some assumed, simulated default)
-quadEDT.sensordataCalib            = [0.09 -0.06 -9.4730 -0.0095 -0.0075 0.0015 101270.95];
-quadEDT.IMUaccel_gain               = [+1.00596 +1.00383 +0.99454];
-quadEDT.IMUgyro_gain                = [0.99861 1.00644 0.99997];
-
-%Gains
-quadEDT.airDensity                  = 1.225;
-quadEDT.altToPrs_gain               = quad.g*quadEDT.airDensity ;
-quadEDT.inverseIMU_gain             = [1./quadEDT.IMUaccel_gain 1./quadEDT.IMUgyro_gain];
-
-%Saturations
-quadEDT.altSenor_min                = 0.44;
-
-%Battery DUMMY
-quadEDT.dummy.batteryStatus         = [3.5 70];
-
-%Vision
-quadEDT.velocityToOpticalFlow_gain  = 1/20;
-
-%% Simulation Parameters for EducationalDroneToolbox (apart from drone dynamics subsystem)
-quadEDT.sampletime                  = 0.005;
-
-%reference values
-%----
-%yaw
-quadEDT.yawStep_amplitude           = 0.1;
-quadEDT.yawStep_time                = 5.5;
-quadEDT.yawStep_duration            = 2.5;
-%pitch
-quadEDT.pitchStep_amplitude         = 0.2; %0.1
-quadEDT.pitchStep_time              = 3;
-quadEDT.pitchStep_duration          = 1.5;
-%roll
-quadEDT.rollStep_amplitude          = 0.0; %0.1
-quadEDT.rollStep_time               = 3; 
-quadEDT.rollStep_duration           = 1;
-%altitude
-quadEDT.takeoff_duration            = 1;
-quadEDT.altitude                    = -1.1;
-%----
-
-%Vision
-quadEDT.NO_VIS_X                    = -99.0;
-quadEDT.NO_VIS_YAW                  = -9.0;
-quadEDT.dummy.posVIS_novisionavail  = [quadEDT.NO_VIS_X;0.0;0.0;quadEDT.NO_VIS_YAW ]; %drone sends this position to Drone_compensator when no marker to reconstruct position found
-quadEDT.dummy.usePosVIS_flag        = 0;
-
-
-%Motor Failure Simulation
-quadEDT.motorFailure_time           = 10;%0.1;
-quadEDT.motorFailure_duration       = 0.05;
-quadEDT.motorFailure_m1             = 0;
-quadEDT.motorFailure_m2             = 0;
-quadEDT.motorFailure_m3             = -30;
-quadEDT.motorFailure_m4             = 20;
-
-quadEDT.motorUnknownGain_gain       = 1; %amplifies the TF from motors_datin (command 0-500) to acutal rotor speed (rad/s) used in the simulation; use as "model uncertainty"

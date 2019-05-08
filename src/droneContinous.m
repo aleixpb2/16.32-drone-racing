@@ -2,7 +2,7 @@ function output = droneContinous(input)
 % Dynamics, path constraints and integrands
 
 g      = input.auxdata.g;
-m      = input.auxdata.m;
+m      = input.auxdata.M;
 Axyz   = input.auxdata.Axyz;
 Ix     = input.auxdata.Ix;
 Iy     = input.auxdata.Iy;
