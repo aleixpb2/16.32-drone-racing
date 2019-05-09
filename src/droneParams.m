@@ -107,4 +107,4 @@ quad.mb = quad.g*(quad.Mc*quad.ec/2+quad.Mb*quad.r/2);    %   mb      Static bla
 quad.Ir = quad.nb*(quad.Ib+quad.Ic);            %   Ir      Total rotor inertia                 1x1
 
 % Aerodynamic constants
-quad.Axyz   = [0.05 0.10 0.001];
+quad.Axyz   = [0.10 0.10 0.20];

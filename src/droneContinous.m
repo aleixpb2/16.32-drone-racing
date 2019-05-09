@@ -49,5 +49,5 @@ for i_phase = 1:n_gates
     output(i_phase).dynamics   = [pos_dot_x, pos_dot_y, pos_dot_z, ...
         vel_dot_x, vel_dot_y, vel_dot_z, orient_dot_x, orient_dot_y, orient_dot_z, ...
         rate_dot_x, rate_dot_y, rate_dot_z];
-    %output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
+    output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
 end

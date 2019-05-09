@@ -10,11 +10,11 @@ vel_min = ones(1, 3)*-50;
 vel_max = -vel_min;
 
 % Orientation in rad
-phi_min = -pi/2;
+phi_min = -80*pi/180;
 phi_max = -phi_min;
 theta_min = -80*pi/180;
 theta_max = -theta_min;
-psi_min = -pi;
+psi_min = -179*pi/180;
 psi_max = -psi_min;
 
 orient_min = [phi_min, theta_min, psi_min];
@@ -34,7 +34,7 @@ rate_max = [p_max, q_max, r_max];
 
 % Input limits
 T_min = 0;
-T_max = 20;   % k*4*w^2
+T_max = 25;   % k*4*w^2
 tau_phi_min = -5;
 tau_phi_max = -tau_phi_min;
 tau_theta_min = tau_phi_min;
@@ -46,10 +46,10 @@ u_min = [T_min, tau_phi_min, tau_theta_min, tau_psi_min];
 u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 
 % Path constraint
-z_min = 0;  % TODO
-z_max = 1000;
+z_min = -10;  % TODO
+z_max = 100;
 
-tol_gates = 0.05;  % TODO
+tol_gates = 0.10;  % Gates are virtual cubes with side 10 cm
 
 for i_phase = 1:n_gates
     bounds.phase(i_phase).initialtime.lower = t_min;
@@ -63,7 +63,7 @@ for i_phase = 1:n_gates
         bounds.phase(i_phase).initialstate.upper = ...
             [gates(i_phase-1).x + tol_gates, gates(i_phase-1).y + tol_gates, gates(i_phase-1).z + tol_gates, ...
             vel_max,  orient_max, rate_max];
-    else
+    else % Set initial conditions
          bounds.phase(i_phase).initialstate.lower = ...
             [pos_min, vel_min,  orient_min, rate_min];
         bounds.phase(i_phase).initialstate.upper = ...
@@ -82,8 +82,8 @@ for i_phase = 1:n_gates
     bounds.phase(i_phase).control.lower = u_min;
     bounds.phase(i_phase).control.upper = u_max;
 
-    %bounds.phase(i_phase).path.lower  = z_min;  % z constraint TODO
-    %bounds.phase(i_phase).path.upper  = z_max;
+    bounds.phase(i_phase).path.lower  = z_min;  % z constraint TODO
+    bounds.phase(i_phase).path.upper  = z_max;
     
     % Phase continuity constraints (n-1)
     if i_phase < n_gates
@@ -98,14 +98,4 @@ bounds.phase(1).initialtime.lower = 0;
 bounds.phase(1).initialtime.upper = 0;
 bounds.phase(1).initialstate.lower = zeros(1,12);
 bounds.phase(1).initialstate.upper = zeros(1,12);
-% TODO
-bounds.phase(1).initialstate.lower(3) = 0;  % z ini
-bounds.phase(1).initialstate.upper(3) = 0;
-bounds.phase(1).initialstate.lower(9) = 0*pi/180;  % yaw ini
-bounds.phase(1).initialstate.upper(9) = 0*pi/180;
-
-% DEBUG
-%bounds.phase(1).finalstate.lower(7) = 20*pi/180;  % roll
-%bounds.phase(1).finalstate.upper(7) = 20*pi/180;
-
 end
