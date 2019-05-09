@@ -6,16 +6,16 @@ t_max = 60*2;  % s
 
 pos_min = ones(1, 3)*-100;
 pos_max = -pos_min;
-vel_min = ones(1, 3)*-20;
+vel_min = ones(1, 3)*-50;
 vel_max = -vel_min;
 
 % Orientation in rad
 phi_min = -pi/2;
-phi_max = pi/2;
-theta_min = -pi/2;
-theta_max = pi/2;
+phi_max = -phi_min;
+theta_min = -80*pi/180;
+theta_max = -theta_min;
 psi_min = -pi;
-psi_max = pi;
+psi_max = -psi_min;
 
 orient_min = [phi_min, theta_min, psi_min];
 orient_max = [phi_max, theta_max, psi_max];
@@ -47,7 +47,7 @@ u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 
 % Path constraint
 z_min = 0;  % TODO
-z_max = 100;
+z_max = 1000;
 
 for i_phase = 1:n_gates
     bounds.phase(i_phase).initialtime.lower = t_min;
@@ -92,5 +92,9 @@ bounds.phase(1).initialstate.lower(3) = 0;  % z ini
 bounds.phase(1).initialstate.upper(3) = 0;
 bounds.phase(1).initialstate.lower(9) = 0*pi/180;  % yaw ini
 bounds.phase(1).initialstate.upper(9) = 0*pi/180;
+
+% DEBUG
+%bounds.phase(1).finalstate.lower(7) = 20*pi/180;  % roll
+%bounds.phase(1).finalstate.upper(7) = 20*pi/180;
 
 end

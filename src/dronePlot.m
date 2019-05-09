@@ -33,7 +33,7 @@ end
 
 % Set to 0 elements that are very small
 pos_tol = 0.001; vel_tol = pos_tol; orient_tol = 0.5*pi/180; rate_tol = orient_tol;
-T_tol = 0.1; tau_tol = 0.01;
+T_tol = 0.1; tau_tol = 0.1;
 x_tot(abs(x_tot) < pos_tol) = 0;
 y_tot(abs(y_tot) < pos_tol) = 0;
 z_tot(abs(z_tot) < pos_tol) = 0;
@@ -83,6 +83,19 @@ daspect(tmpAspect([1 1 1]))
 xlabel('x'), ylabel('y'), zlabel('z')
 grid on
 
+%% Velocity
+f = figure();
+hold on
+subplot(1,3,1)
+plot(time_tot, vel_x_tot, 'LineWidth', 1.5)
+title('v_x vs t'), xlabel('t'), ylabel('v_x')
+subplot(1,3,2)
+plot(time_tot, vel_y_tot, 'LineWidth', 1.5)
+title('v_y vs t'), xlabel('t'), ylabel('v_y')
+subplot(1,3,3)
+plot(time_tot, vel_z_tot, 'LineWidth', 1.5)
+title('v_z vs t'), xlabel('t'), ylabel('v_z')
+
 %% Orientation
 f = figure();
 hold on
@@ -95,6 +108,20 @@ title('Pitch vs t'), xlabel('t'), ylabel('Pitch (deg)')
 subplot(1,3,3)
 plot(time_tot, yaw_tot.*180./pi, 'LineWidth', 1.5)
 title('Yaw vs t'), xlabel('t'), ylabel('Yaw (deg)')
+
+%% Rates
+f = figure();
+hold on
+subplot(1,3,1)
+plot(time_tot, p_tot.*180./pi, 'LineWidth', 1.5)
+title('Roll rate vs t'), xlabel('t'), ylabel('Roll rate (deg/s)')
+subplot(1,3,2)
+plot(time_tot, q_tot.*180./pi, 'LineWidth', 1.5)
+title('Pitch rate vs t'), xlabel('t'), ylabel('Pitch rate (deg/s)')
+subplot(1,3,3)
+plot(time_tot, r_tot.*180./pi, 'LineWidth', 1.5)
+title('Yaw rate vs t'), xlabel('t'), ylabel('Yaw rate (deg/s)')
+
 
 %% Inputs
 f = figure();
@@ -109,5 +136,3 @@ plot(time_tot, troll_tot, 'LineWidth', 1.5)
 plot(time_tot, tpitch_tot, 'LineWidth', 1.5)
 plot(time_tot, tyaw_tot, 'LineWidth', 1.5)
 legend('Tau phi', 'Tau theta', 'Tau psi')
-
-% TODO: plot velocity and rates

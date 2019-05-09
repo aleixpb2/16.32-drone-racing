@@ -25,7 +25,6 @@ for i_phase = 1:n_gates  % TODO: need to iterate?
     tau_phi                = input.phase(i_phase).control(:,2);
     tau_theta              = input.phase(i_phase).control(:,3);
     tau_psi                = input.phase(i_phase).control(:,4);
-    
     sphi   = sin(phi);
     stheta = sin(theta);
     spsi   = sin(psi);
@@ -34,12 +33,15 @@ for i_phase = 1:n_gates  % TODO: need to iterate?
     cpsi   = cos(psi);
     ttheta = tan(theta);
     
+    ctheta(ctheta==0) = 0.001;
+    assert(all(ctheta))  % elements are nonzero TODO
+    
     pos_dot(:,1)     = vel_x;
     pos_dot(:,2)     = vel_y;
     pos_dot(:,3)     = vel_z;
-    vel_dot(:,1)     = T./m.*(sphi.*spsi + cphi.*cpsi.*stheta) - Axyz(1).*vel_x./m;
-    vel_dot(:,2)     = T./m.*(cphi.*spsi.*stheta - cpsi.*sphi) - Axyz(2).*vel_y./m;
-    vel_dot(:,3)     = T./m.*(cphi.*ctheta) - g                - Axyz(3).*vel_z./m;
+    vel_dot(:,1)     = T.*(sphi.*spsi + cphi.*cpsi.*stheta)./m;% - Axyz(1).*vel_x./m;
+    vel_dot(:,2)     = T.*(cphi.*spsi.*stheta - cpsi.*sphi)./m;% - Axyz(2).*vel_y./m;
+    vel_dot(:,3)     = T.*(cphi.*ctheta)./m - g               ;% - Axyz(3).*vel_z./m;
     orient_dot(:,1)  = p + r.*(cphi.*ttheta) + q.*(sphi.*ttheta);
     orient_dot(:,2)  = q.*cphi - r.*sphi;
     orient_dot(:,3)  = r.*cphi./ctheta + q.*sphi./ctheta;

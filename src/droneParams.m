@@ -92,16 +92,12 @@ quad.Ix = 0.03;
 quad.Iy = quad.Ix;
 quad.Iz = 0.16;
 
-quad.h = -(6.5+9.376)/1000;     %   h       Height of rotors above CoG          1x1
 quad.d = 0.0624;                %   d       Length of flyer arms                1x1
 
 %Rotor
 quad.nb = 2;                    %   b       Number of blades per rotor          1x1
 quad.r = 33/1000;               %   r       Rotor radius                        1x1
 
-quad.c = 0.008;                 %   c       Blade chord                         1x1
-
-quad.e = 0.0;                   %   e       Flapping hinge offset               1x1
 quad.Mb = 0.0015/4;             %   Mb      Rotor blade mass                    1x1
 quad.Mc = 0;                    %   Mc      Estimated hub clamp mass            1x1
 quad.ec = 0;                    %   ec      Blade root clamp displacement       1x1
@@ -109,33 +105,6 @@ quad.Ib = quad.Mb*(quad.r-quad.ec)^2/4 ;        %   Ib      Rotor blade rotation
 quad.Ic = quad.Mc*(quad.ec)^2/4;                %   Ic      Estimated root clamp inertia        1x1
 quad.mb = quad.g*(quad.Mc*quad.ec/2+quad.Mb*quad.r/2);    %   mb      Static blade moment                 1x1
 quad.Ir = quad.nb*(quad.Ib+quad.Ic);            %   Ir      Total rotor inertia                 1x1
-
-quad.Ct = 0.0107;                               %   Ct      Non-dim. thrust coefficient         1x1
-quad.Cq = quad.Ct*sqrt(quad.Ct/2);              %   Cq      Non-dim. torque coefficient         1x1
-
-quad.sigma = quad.c*quad.nb/(pi*quad.r);        %  sigma   Rotor solidity ratio                1x1
-quad.thetat = 6.8*(pi/180);                     %  thetat  Blade tip angle  @TODO              1x1
-quad.theta0 = 14.6*(pi/180);                    %  theta0  Blade root angle @TODO              1x1
-quad.theta1 = quad.thetat - quad.theta0;        %  theta1  Blade twist angle                   1x1
-quad.theta75 = quad.theta0 + 0.75*quad.theta1;  %  theta76 3/4 blade angle                     1x1
-quad.thetai = quad.thetat*(quad.r/quad.e);      %  thetai  Blade ideal root approximation      1x1
-if isinf(quad.thetai) quad.thetai = 10000; end;
-quad.a = 5.5;                                   %  a       Lift slope gradient @TODO           1x1
-
-% derived constants
-quad.A = pi*quad.r^2;                           %  A       Rotor disc area                     1x1
-quad.gamma = quad.rho*quad.a*quad.c*quad.r^4/(quad.Ib+quad.Ic);%   gamma   Lock number                         1x1
-
-quad.b = quad.Ct*quad.rho*quad.A*quad.r^2;      %  T = b w^2
-quad.k = quad.Cq*quad.rho*quad.A*quad.r^3;      %  Q = k w^2
-
-quadEDT.w2ToThrust_gain = quad.Ct*quad.rho*quad.A*quad.r^2;
-
-% Motors
-quadEDT.motors_max                  = 500;     %max command to control motors    
-quadEDT.motorcommandToW2_gain       = 13840.8; %motor command for Rolling Spider (0-500) to motorspeed^2
-
-quadEDT.thrustToMotorcommand        = 1/(quadEDT.w2ToThrust_gain*quadEDT.motorcommandToW2_gain);
 
 % Aerodynamic constants
 quad.Axyz   = [0.05 0.10 0.001];
