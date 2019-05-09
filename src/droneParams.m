@@ -88,9 +88,9 @@ quad.M = 0.8;                    %   M       Mass                               
 % Ixx,yy,zz                     Flyer rotational inertia matrix     3x3
 % Mambo
 %quad.J = [0.0000582857 0.0000716914 0.0001];
-quad.Ix = 0.02;
+quad.Ix = 0.03;
 quad.Iy = quad.Ix;
-quad.Iz = 0.15;
+quad.Iz = 0.16;
 
 quad.h = -(6.5+9.376)/1000;     %   h       Height of rotors above CoG          1x1
 quad.d = 0.0624;                %   d       Length of flyer arms                1x1
@@ -138,4 +138,4 @@ quadEDT.motorcommandToW2_gain       = 13840.8; %motor command for Rolling Spider
 quadEDT.thrustToMotorcommand        = 1/(quadEDT.w2ToThrust_gain*quadEDT.motorcommandToW2_gain);
 
 % Aerodynamic constants
-quad.Axyz   = [0.1 0.1 0.001];
+quad.Axyz   = [0.05 0.10 0.001];

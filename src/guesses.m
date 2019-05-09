@@ -13,7 +13,7 @@ vel_min = 0;
 vel_max = 10;
 
 u_min = 0;
-u_max = 0.2;
+u_max = 40;
 
 
 for i_phase = 1:n_gates

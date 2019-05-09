@@ -34,14 +34,12 @@ for i_phase = 1:n_gates  % TODO: need to iterate?
     cpsi   = cos(psi);
     ttheta = tan(theta);
     
-    vel_x
     pos_dot(:,1)     = vel_x;
     pos_dot(:,2)     = vel_y;
     pos_dot(:,3)     = vel_z;
-    vel_dot(:,1)     = -T./m.*(sphi.*spsi + cphi.*cpsi.*stheta) - Axyz(1).*vel_x./m;
-    vel_dot(:,2)     = -T./m.*(cphi.*spsi.*stheta - cpsi.*sphi) - Axyz(2).*vel_y./m;
-    vel_dot(:,3)     = g - T./m.*(cphi.*ctheta)                 - Axyz(3).*vel_z./m;
-    vel_dot = -vel_dot; % TODO
+    vel_dot(:,1)     = T./m.*(sphi.*spsi + cphi.*cpsi.*stheta) - Axyz(1).*vel_x./m;
+    vel_dot(:,2)     = T./m.*(cphi.*spsi.*stheta - cpsi.*sphi) - Axyz(2).*vel_y./m;
+    vel_dot(:,3)     = T./m.*(cphi.*ctheta) - g                - Axyz(3).*vel_z./m;
     orient_dot(:,1)  = p + r.*(cphi.*ttheta) + q.*(sphi.*ttheta);
     orient_dot(:,2)  = q.*cphi - r.*sphi;
     orient_dot(:,3)  = r.*cphi./ctheta + q.*sphi./ctheta;

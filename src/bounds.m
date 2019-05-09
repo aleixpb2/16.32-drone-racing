@@ -21,9 +21,9 @@ orient_min = [phi_min, theta_min, psi_min];
 orient_max = [phi_max, theta_max, psi_max];
 
 % Rate in rad/s
-p_max = 270*(pi/180);
-q_max = 270*(pi/180);
-r_max = 270*(pi/180);
+p_max = 60*(pi/180);
+q_max = 60*(pi/180);
+r_max = 60*(pi/180);
 
 p_min = -p_max;
 q_min = -q_max;
@@ -34,19 +34,19 @@ rate_max = [p_max, q_max, r_max];
 
 % Input limits
 T_min = 0;
-T_max = 3.5;   % k*4*w^2
-tau_phi_min = -0.8;
+T_max = 20;   % k*4*w^2
+tau_phi_min = -5;
 tau_phi_max = -tau_phi_min;
 tau_theta_min = tau_phi_min;
 tau_theta_max = tau_phi_max;
-tau_psi_min = -0.5;
+tau_psi_min = -1.5;
 tau_psi_max = -tau_psi_min;
 
 u_min = [T_min, tau_phi_min, tau_theta_min, tau_psi_min];
 u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 
 % Path constraint
-z_min = -100;  % TODO
+z_min = 0;  % TODO
 z_max = 100;
 
 for i_phase = 1:n_gates
@@ -87,5 +87,10 @@ bounds.phase(1).initialtime.lower = 0;
 bounds.phase(1).initialtime.upper = 0;
 bounds.phase(1).initialstate.lower = zeros(1,12);
 bounds.phase(1).initialstate.upper = zeros(1,12);
+% TODO
+bounds.phase(1).initialstate.lower(3) = 0;  % z ini
+bounds.phase(1).initialstate.upper(3) = 0;
+bounds.phase(1).initialstate.lower(9) = 0*pi/180;  % yaw ini
+bounds.phase(1).initialstate.upper(9) = 0*pi/180;
 
 end
