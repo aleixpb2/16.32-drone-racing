@@ -70,6 +70,10 @@ function quad = droneParams
 
 %--------------------
 % Update:
+% date: 2019/04/21
+% editor: Aleix Paris
+
+% Update:
 % date: 2015/08/23
 % editor: Fabian Riether
 % comment: This updated version now contains parameters for Peter Corke's

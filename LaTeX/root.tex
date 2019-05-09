@@ -47,9 +47,11 @@ Optimal Control for Autonomous Drone Racing
 \pagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO: cite GPOPS guide and files under "Literature"
+% TODO: show drone image
 \begin{abstract}
 
-In this paper we study the problem of optimal control of a quadrotor to minimize the time it takes it to finish a race...
+This paper studies the problem of optimal control of a quadrotor to minimize the time it takes it to pass trough several waypoints, that is, to finish a race.
 
 \end{abstract}
 
@@ -57,113 +59,36 @@ In this paper we study the problem of optimal control of a quadrotor to minimize
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}\label{s:intro}
 
-This template provides authors with most of the formatting specifications needed for preparing electronic versions of their papers. All standard paper components have been specified for three reasons: (1) ease of use when formatting individual papers, (2) automatic compliance to electronic requirements that facilitate the concurrent or later production of electronic products, and (3) conformity of style throughout a conference proceedings. Margins, column widths, line spacing, and type styles are built-in; examples of the type styles are provided throughout this document and are identified in italic type, within parentheses, following the example. Some components, such as multi-leveled equations, graphics, and tables are not prescribed, although the various table text styles are provided. The formatter will need to create these components, incorporating the applicable criteria that follow.
+Optimal control problems have been widely studied...
+The Red Bull Air Race, where airplanes cross gates to end a circuit as fast as possible is an example of a similar problem that has been studied... Nowadays, every team has the role of a `tactician', which is in charge of...
 
-\section{RELATED WORK}\label{s:rel_work}
+MENTION PARKER AND AUTONOMOUS DRONE RACING COMPETITIONS...
 
-The problem of autonomous landing has already been studied in previous research.
 
 \section{PROBLEM FORMULATION}\label{s:problem}
 
-Problem.
-
-\section{ALGORITHM}\label{s:alg}
-
-Alg.
-
-\section{EXPERIMENTAL RESULTS}\label{s:exp}
-
-Exp.
-
-\section{MATH}
-\subsection{Abbreviations and Acronyms} Define abbreviations and acronyms the first time they are used in the text, even after they have been defined in the abstract. Abbreviations such as IEEE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title or heads unless they are unavoidable.
-
-\subsection{Units}
-
-\begin{itemize}
-
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as 3.5-inch disk drive.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: Wb/m2 or webers per square meter, not webers/m2.  Spell out units when they appear in text: . . . a few henries, not . . . a few H.
-\item Use a zero before decimal points: 0.25, not .25. Use cm3, not cc. (bullet list)
-
-\end{itemize}
+Problem, dynamics and assumptions. Minimize t subject to...
 
 
-\subsection{Equations}
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
+ 
+ Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat. 
 
-The equations are an exception to the prescribed specifications of this template. You will need to determine whether or not your equation should be typed using either the Times New Roman or the Symbol font (please no other font). To create multileveled equations, it may be necessary to treat the equation as a graphic and insert it into the text after your paper is styled. Number equations consecutively. Equation numbers, within parentheses, are to position flush right, as in (1), using a right tab stop. To make your equations more compact, you may use the solidus ( / ), the exp function, or appropriate exponents. Italicize Roman symbols for quantities and variables, but not Greek symbols. Use a long dash rather than a hyphen for a minus sign. Punctuate equations with commas or periods when they are part of a sentence, as in
+\section{RESULTS}\label{s:exp}
 
-$$
-\alpha + \beta = \chi \eqno{(1)}
-$$
+Explain solved using GPOPS.
 
-Note that the equation is centered using a center tab stop. Be sure that the symbols in your equation have been defined before or immediately following the equation. Use (1), not Eq. (1) or equation (1), except at the beginning of a sentence: Equation (1) is . . .
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
+ 
+ Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
+  
+  Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat. 
 
-\subsection{Some Common Mistakes}
-\begin{itemize}
-
-
-\item The word data is plural, not singular.
-\item The subscript for the permeability of vacuum ?0, and other common scientific constants, is zero with subscript formatting, not a lowercase letter o.
-\item In American English, commas, semi-/colons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited, such as a title or full quotation. When quotation marks are used, instead of a bold or italic typeface, to highlight a word or phrase, punctuation should appear outside of the quotation marks. A parenthetical phrase or statement at the end of a sentence is punctuated outside of the closing parenthesis (like this). (A parenthetical sentence is punctuated within the parentheses.)
-\item A graph within a graph is an inset, not an insert. The word alternatively is preferred to the word alternately (unless you really mean something that alternates).
-\item Do not use the word essentially to mean approximately or effectively.
-\item In your paper title, if the words that uses can accurately replace the word using, capitalize the u; if not, keep using lower-cased.
-\item Be aware of the different meanings of the homophones affect and effect, complement and compliment, discreet and discrete, principal and principle.
-\item Do not confuse imply and infer.
-\item The prefix non is not a word; it should be joined to the word it modifies, usually without a hyphen.
-\item There is no period after the et in the Latin abbreviation et al..
-\item The abbreviation i.e. means that is, and the abbreviation e.g. means for example.
-
-\end{itemize}
-
-
-\section{USING THE TEMPLATE}
-
-Use this sample document as your LaTeX source file to create your document. Save this file as {\bf root.tex}. You have to make sure to use the cls file that came with this distribution. If you use a different style file, you cannot expect to get required margins. Note also that when you are creating your out PDF file, the source file is only part of the equation. {\it Your \TeX\ $\rightarrow$ PDF filter determines the output file size. Even if you make all the specifications to output a letter file in the source - if your filter is set to produce A4, you will only get A4 output. }
-
-It is impossible to account for all possible situation, one would encounter using \TeX. If you are using multiple \TeX\ files you must make sure that the ``MAIN`` source file is called root.tex - this is particularly important if your conference is using PaperPlaza's built in \TeX\ to PDF conversion tool.
-
-\subsection{Headings, etc}
-
-Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named Heading 1, Heading 2, Heading 3, and Heading 4 are prescribed.
-
-\subsection{Figures and Tables}
-
-Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation Fig. 1, even at the beginning of a sentence.
-
-\begin{table}[h]
-\caption{An Example of a Table}
-\label{table_example}
-\begin{center}
-\begin{tabular}{|c||c|}
-\hline
-One & Two\\
-\hline
-Three & Four\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-
-
-   \begin{figure}[thpb]
-      \centering
-      \framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
-}}
-      %\includegraphics[scale=1.0]{figurefile}
-      \caption{Inductance of oscillation winding on amorphous
-       magnetic core versus DC bias magnetic field}
-      \label{figurelabel}
-   \end{figure}
-   
-
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity Magnetization, or Magnetization, M, not just M. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write Magnetization (A/m) or Magnetization {A[m(1)]}, not just A/m. Do not label axes with a ratio of quantities and units. For example, write Temperature (K), not Temperature/K.
 
 \section{CONCLUSIONS}\label{s:conclusions}
 
-A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions.
+Conclusions
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -176,11 +101,9 @@ A conclusion section is not required. Although a conclusion may review the main 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{APPENDIX}
 
-Appendixes should appear before the acknowledgment.
+Nothing...
 
-\section*{ACKNOWLEDGMENT}
-
-Avoid the stilted expression, One of us (R. B. G.) thanks . . .  Instead, try R. B. G. thanks. Put sponsor acknowledgments in the unnumbered footnote on the first page. Citation: \cite{IEEEexample:article_typical}.
+Citation: \cite{IEEEexample:article_typical}.
 
 %%%%%%%%%%%%%%%%%%% CHECK BIB MANUAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{thebibliography}{99}

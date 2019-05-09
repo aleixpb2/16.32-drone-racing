@@ -1,21 +1,25 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.12.26)  26 APR 2019 00:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.25)  9 MAY 2019 19:39
 entering extended mode
-**./root.tex
-(root.tex
-LaTeX2e <2018-04-01> patch level 5
-(ieeeconf.cls
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**root.tex
+(./root.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(./ieeeconf.cls
 Document Class: ieeeconf 2016/4/23 revision V1.6b by Pradeep Misra
 \@IEEEtrantmpdimenA=\dimen102
 \@IEEEtrantmpdimenB=\dimen103
-\@IEEEtrantmpcountA=\count80
-\@IEEEtrantmpcountB=\count81
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
 \@IEEEtrantmptoksA=\toks14
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 794.
 
-("C:\Users\aleix\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \@IEEEnormalsizefontbaselineskip=\skip41
+
 -- This is a 10 point document.
 \normalsizebaselineskip=\skip42
 \normaljot=\skip43
@@ -78,29 +82,27 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \IEEEiednormlabelsep=\dimen110
 \IEEEiedmathlabelsep=\dimen111
 \IEEEiedtopsep=\skip44
-\c@section=\count82
-\c@subsection=\count83
-\c@subsubsection=\count84
-\c@paragraph=\count85
-\c@IEEEsubequation=\count86
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@IEEEsubequation=\count85
 \abovecaptionskip=\skip45
 \belowcaptionskip=\skip46
-\c@figure=\count87
-\c@table=\count88
-\@IEEEeqnnumcols=\count89
-\@IEEEeqncolcnt=\count90
+\c@figure=\count86
+\c@table=\count87
+\@IEEEeqnnumcols=\count88
+\@IEEEeqncolcnt=\count89
 \@IEEEtmpitemindent=\dimen112
-\c@biography=\count91
+\c@biography=\count90
 \@IEEEtranrubishbin=\box26
 )
 ** ATTENTION: Overriding command lockouts (line 9).
 ** ATTENTION: Overriding IEEE standard margins (line 11).
-
-("C:\Users\aleix\AppData\Local\Programs\MiKTeX 2.9\tex\latex\preprint\balance.s
-ty"
+(/usr/share/texlive/texmf-dist/tex/latex/preprint/balance.sty
 Package: balance 1999/02/23 4.3 (PWD)
 \oldvsize=\dimen113
-) (root.aux)
+) (./root.aux)
 \openout1 = `root.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -130,15 +132,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 45.
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 45.
 
-("C:\Users\aleix\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 84.
-[1{C:/Users/aleix/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
-
-
-] (root.bbl)
+) (./root.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -154,32 +150,33 @@ Before submitting the final camera ready copy, remember to:
 Package balance Warning: You have called \balance in second column
 (balance)                Columns might not be balanced.
 
-[2] (root.aux) ) 
+
+Overfull \vbox (336.63313pt too high) has occurred while \output is active []
+
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+] (./root.aux) ) 
 Here is how much of TeX's memory you used:
- 890 strings out of 492970
- 15578 string characters out of 3126593
- 81267 words of memory out of 3000000
- 4817 multiletter control sequences out of 15000+200000
- 39844 words of font info for 78 fonts, out of 3000000 for 9000
+ 880 strings out of 493029
+ 14490 string characters out of 6136233
+ 71757 words of memory out of 5000000
+ 4473 multiletter control sequences out of 15000+600000
+ 35877 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 26i,9n,20p,916b,283s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
-ps/base/8r.enc}<C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/aleix/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/aleix/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/aleix/A
-ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
-Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy7.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/couri
-er/ucrr8a.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw
-/times/utmb8a.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/urw/times/utmbi8a.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fonts/
-type1/urw/times/utmr8a.pfb><C:/Users/aleix/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (2 pages, 118215 bytes).
+ 26i,9n,19p,685b,283s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
+imes/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pf
+b>
+Output written on root.pdf (1 page, 61532 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
+ 33 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
