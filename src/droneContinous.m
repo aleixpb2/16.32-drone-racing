@@ -10,7 +10,7 @@ Iy     = input.auxdata.Iy;
 Iz     = input.auxdata.Iz;
 
 % Dynamics
-for i_phase = 1:n_gates  % TODO: need to iterate?
+for i_phase = 1:n_gates
     %pos                    = input.phase(i_phase).state(:,1:3);
     vel_x                  = input.phase(i_phase).state(:,4);
     vel_y                  = input.phase(i_phase).state(:,5);
@@ -32,23 +32,22 @@ for i_phase = 1:n_gates  % TODO: need to iterate?
     ctheta = cos(theta);
     cpsi   = cos(psi);
     ttheta = tan(theta);
+
+    pos_dot_x     = vel_x;
+    pos_dot_y     = vel_y;
+    pos_dot_z     = vel_z;
+    vel_dot_x     = T.*(sphi.*spsi + cphi.*cpsi.*stheta)./m - Axyz(1).*vel_x./m;
+    vel_dot_y     = T.*(cphi.*spsi.*stheta - cpsi.*sphi)./m - Axyz(2).*vel_y./m;
+    vel_dot_z     = T.*(cphi.*ctheta)./m - g                - Axyz(3).*vel_z./m;
+    orient_dot_x  = p + r.*(cphi.*ttheta) + q.*(sphi.*ttheta);
+    orient_dot_y  = q.*cphi - r.*sphi;
+    orient_dot_z  = r.*cphi./ctheta + q.*sphi./ctheta;
+    rate_dot_x    = ((Iy - Iz).*r.*q + tau_phi)./Ix;
+    rate_dot_y    = ((Iz - Ix).*p.*r + tau_theta)./Iy;
+    rate_dot_z    = ((Ix - Iy).*p.*q + tau_psi)./Iz;
     
-    ctheta(ctheta==0) = 0.001;
-    assert(all(ctheta))  % elements are nonzero TODO
-    
-    pos_dot(:,1)     = vel_x;
-    pos_dot(:,2)     = vel_y;
-    pos_dot(:,3)     = vel_z;
-    vel_dot(:,1)     = T.*(sphi.*spsi + cphi.*cpsi.*stheta)./m;% - Axyz(1).*vel_x./m;
-    vel_dot(:,2)     = T.*(cphi.*spsi.*stheta - cpsi.*sphi)./m;% - Axyz(2).*vel_y./m;
-    vel_dot(:,3)     = T.*(cphi.*ctheta)./m - g               ;% - Axyz(3).*vel_z./m;
-    orient_dot(:,1)  = p + r.*(cphi.*ttheta) + q.*(sphi.*ttheta);
-    orient_dot(:,2)  = q.*cphi - r.*sphi;
-    orient_dot(:,3)  = r.*cphi./ctheta + q.*sphi./ctheta;
-    rate_dot(:,1)    = ((Iy - Iz).*r.*q + tau_phi)./Ix;
-    rate_dot(:,2)    = ((Iz - Ix).*p.*r + tau_theta)./Iy;
-    rate_dot(:,3)    = ((Ix - Iy).*p.*q + tau_psi)./Iz;
-    
-    output(i_phase).dynamics   = [pos_dot, vel_dot, orient_dot, rate_dot];
-    output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
+    output(i_phase).dynamics   = [pos_dot_x, pos_dot_y, pos_dot_z, ...
+        vel_dot_x, vel_dot_y, vel_dot_z, orient_dot_x, orient_dot_y, orient_dot_z, ...
+        rate_dot_x, rate_dot_y, rate_dot_z];
+    %output(i_phase).path       = input.phase(i_phase).state(:,3);  % z
 end

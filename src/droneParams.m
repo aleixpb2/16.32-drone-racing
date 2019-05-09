@@ -83,7 +83,7 @@ quad.rho = 1.184;                %   rho     Density of air                     
 quad.muv = 1.5e-5;               %   muv     Viscosity of air                    1x1
 
 % Airframe                 
-quad.M = 0.8;                    %   M       Mass                                1x1
+quad.M = 1.1;                    %   M       Mass                                1x1
 
 % Ixx,yy,zz                     Flyer rotational inertia matrix     3x3
 % Mambo

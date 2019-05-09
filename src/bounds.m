@@ -2,7 +2,7 @@ function bounds = bounds
 global gates n_gates
 
 t_min = 0;
-t_max = 60*2;  % s
+t_max = 60;  % s
 
 pos_min = ones(1, 3)*-100;
 pos_max = -pos_min;
@@ -49,30 +49,41 @@ u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 z_min = 0;  % TODO
 z_max = 1000;
 
+tol_gates = 0.05;  % TODO
+
 for i_phase = 1:n_gates
     bounds.phase(i_phase).initialtime.lower = t_min;
     bounds.phase(i_phase).initialtime.upper = t_max;
     bounds.phase(i_phase).finaltime.lower = t_min;
     bounds.phase(i_phase).finaltime.upper =  t_max;
-    bounds.phase(i_phase).initialstate.lower = ...
-        [pos_min, vel_min,  orient_min, rate_min];
-    bounds.phase(i_phase).initialstate.upper = ...
-        [pos_max, vel_max,  orient_max, rate_max];
+    if i_phase > 1
+        bounds.phase(i_phase).initialstate.lower = ...
+            [gates(i_phase-1).x - tol_gates, gates(i_phase-1).y - tol_gates, gates(i_phase-1).z - tol_gates, ...
+            vel_min,  orient_min, rate_min];
+        bounds.phase(i_phase).initialstate.upper = ...
+            [gates(i_phase-1).x + tol_gates, gates(i_phase-1).y + tol_gates, gates(i_phase-1).z + tol_gates, ...
+            vel_max,  orient_max, rate_max];
+    else
+         bounds.phase(i_phase).initialstate.lower = ...
+            [pos_min, vel_min,  orient_min, rate_min];
+        bounds.phase(i_phase).initialstate.upper = ...
+         [pos_max, vel_max,  orient_max, rate_max];
+    end
     bounds.phase(i_phase).state.lower = ...
         [pos_min, vel_min,  orient_min, rate_min];
     bounds.phase(i_phase).state.upper = ...
         [pos_max, vel_max,  orient_max, rate_max];
     bounds.phase(i_phase).finalstate.lower = ...
-        [gates(i_phase).x, gates(i_phase).y, gates(i_phase).z, ...
+        [gates(i_phase).x - tol_gates, gates(i_phase).y - tol_gates, gates(i_phase).z - tol_gates, ...
          vel_min,  orient_min, rate_min];  % Gate (position) constraints
     bounds.phase(i_phase).finalstate.upper = ...
-        [gates(i_phase).x, gates(i_phase).y, gates(i_phase).z, ...
+        [gates(i_phase).x + tol_gates, gates(i_phase).y + tol_gates, gates(i_phase).z + tol_gates, ...
          vel_max,  orient_max, rate_max];
     bounds.phase(i_phase).control.lower = u_min;
     bounds.phase(i_phase).control.upper = u_max;
 
-    bounds.phase(i_phase).path.lower  = z_min;  % z constraint
-    bounds.phase(i_phase).path.upper  = z_max;
+    %bounds.phase(i_phase).path.lower  = z_min;  % z constraint TODO
+    %bounds.phase(i_phase).path.upper  = z_max;
     
     % Phase continuity constraints (n-1)
     if i_phase < n_gates

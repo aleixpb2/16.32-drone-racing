@@ -24,7 +24,6 @@ setup.guess                       = guesses;
 setup.auxdata                     = droneParams;
 % setup.mesh                        = mesh;
 setup.nlp.solver                  = 'ipopt';
-setup.nlp.ipoptoptions.linear_solver = 'ma57';
 setup.derivatives.supplier        = 'sparseCD';
 setup.derivatives.derivativelevel = 'second';
 setup.method                      = 'RPM-Differentiation';

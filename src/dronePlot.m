@@ -33,7 +33,7 @@ end
 
 % Set to 0 elements that are very small
 pos_tol = 0.001; vel_tol = pos_tol; orient_tol = 0.5*pi/180; rate_tol = orient_tol;
-T_tol = 0.1; tau_tol = 0.1;
+T_tol = 0.1; tau_tol = 0.05;
 x_tot(abs(x_tot) < pos_tol) = 0;
 y_tot(abs(y_tot) < pos_tol) = 0;
 z_tot(abs(z_tot) < pos_tol) = 0;

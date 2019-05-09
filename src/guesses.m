@@ -1,19 +1,19 @@
 function guess = guesses
 
-global n_gates
+global gates n_gates
 
 t_min = 0;
 t_max = n_gates*2;
 
 time_vec = linspace(t_min, t_max, n_gates+1);
 
-pos_min = -10;
-pos_max = 50;
+pos_min = 0;
+pos_max = 20;
 vel_min = -20;
 vel_max = 20;
-orient_min = -70*pi/180;
+orient_min = -30*pi/180;
 orient_max = -orient_min;
-rate_min = -70*pi/180;
+rate_min = -30*pi/180;
 rate_max = -rate_min;
 
 T_min = 0;
