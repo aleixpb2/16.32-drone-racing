@@ -28,9 +28,11 @@
 %\usepackage{times} % assumes new font selection scheme installed
 %\usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage[]{graphicx}
 \usepackage{balance}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage{amsfonts}
 \hypersetup{
 	colorlinks   = true,  % Colour links instead of ugly boxes
 	urlcolor     = black, % Colour for external hyperlinks
@@ -56,10 +58,12 @@ Optimal Control for Autonomous Drone Racing
 \pagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO: use bm instead of boldsymbol
 % TODO: cite GPOPS guide and files under "Literature"
 % TODO: show all images in the folder
 % TODO: MORE dynamics references
 % TODO: make video, add to rar, and add as well the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
+% TODO remove "we"
 % TODO: read sheets, they have more TODOS
 % TODO: TODOS in the code
 
@@ -83,10 +87,22 @@ The paper is structured as follows: Section~\ref{s:problem} presents the formula
 
 \section{PROBLEM FORMULATION}\label{s:problem}
 
-Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}.%TODO CITE
+Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}. %TODO CITE
 This section presents the geometry of a quadrotor, its dynamics and the mathematical formulation of the problem in hand.
 
-\subsection{Quadrotor geometry and notation}
+\subsection{Assumptions}
+
+The formulation that follows considers the following assumptions:
+\begin{enumerate}
+	\item The maximum and minimum altitudes of the quadrotor are similar and thus the air density and gravity are constants.
+	\item The vehicle is flying in zero-wind conditions.
+	\item No ground effect is considered.
+	\item \label{as:Ir} The angular velocities of the rotors are similar, and the rotors' inertia $I_r$ is small.
+	\item \label{as:inertia} The quadrotor is symmetrical with its four arms aligned with the body x- and y-axes.
+	\item The propellers are rigid and thus blade flapping does not occur.
+\end{enumerate}
+
+\subsection{Quadrotor Geometry and Notation}
 
 The quadrotor's absolute linear position is defined in the inertial frame with the vector \bm{$\xi$}. Similarly, the attitude (angular position of the drone with respect to the inertial frame) is defined with the vector \bm{$\eta$}. Roll angle $\phi$ determines the rotation of the vehicle around the x-axis, pitch angle $\theta$ defines a rotation around the y-axis, and yaw angle $\psi$ determines the quadrotor's rotation around the z-axis:
 
@@ -100,11 +116,41 @@ $$\bm{V}_{B}=\left[ \begin{array}{c}{v_{x, B}} \\ {v_{y, B}} \\ {v_{z, B}}\end{a
 
 % TODO: delete VB?
 
-The rotation from the body frame to the inertial frame can be defined with the matrix
+Figure~\ref{fig:quad_frame} shows the inertial and body frame, as well as the Euler and angular velocity angles defined previously.
+
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/quad_frame.png}
+	\caption{Inertial and body-fixed frame of the quadrotor, showing the Euler and angular velocity angles [?] %TODO CITE
+		}
+	\label{fig:quad_frame}
+\end{figure}
+
+
+ The rotation from the body frame to the inertial frame can be defined with the matrix
 
 $$\bm{R}=\left[ \begin{array}{ccc}{C_{\psi} C_{\theta}} & {C_{\psi} S_{\theta} S_{\phi}-S_{\psi} C_{\phi}} & {C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} C_{\theta}} & {S_{\psi} S_{\theta} S_{\phi}+C_{\psi} C_{\phi}} & {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {-S_{\theta}} & {C_{\theta} S_{\phi}} & {C_{\theta} C_{\phi}}\end{array}\right]$$
 
 in which $S_{x}=\sin (x)$ and $C_{x}=\cos (x)$. Note that this rotation matrix is orthogonal and thus the rotation matrix from the inertial frame to the body frame is $\bm{R^{-1} = \bm{R^T}}$.
+
+To obtain the angular velocities in the body frame from the angular velocities in the inertial frame, the matrix $\bm{W_\eta}$ should be used:
+
+$\bm{\nu}=\bm{W}_{\eta} \dot{\bm{\eta}}, \hfill \left[ \begin{array}{l}{p} \\ {q} \\ {r}\end{array}\right]=\left[ \begin{array}{ccc}{1} & {0} & {-S_{\theta}} \\ {0} & {C_{\phi}} & {C_{\theta} S_{\phi}} \\ {0} & {-S_{\phi}} & {C_{\theta} C_{\phi}}\end{array}\right] \left[ \begin{array}{c}{\dot{\phi}} \\ {\dot{\theta}} \\ {\dot{\psi}}\end{array}\right]$
+
+Its inverse is the transformation matrix from the body frame to the inertial frame, which will be used later to assemble the quadrotor dynamics:
+
+$\dot{\bm{\eta}}=\bm{W}_{\eta}^{-1} \bm{\nu}$, \hfill $\left[ \begin{array}{c}{\dot{\phi}} \\ {\dot{\theta}} \\ {\dot{\psi}}\end{array}\right]=\left[ \begin{array}{ccc}{1} & {S_{\phi} T_{\theta}} & {C_{\phi} T_{\theta}} \\ {0} & {C_{\phi}} & {-S_{\phi}} \\ {0} & {S_{\phi} / C_{\theta}} & {C_{\phi} / C_{\theta}}\end{array}\right] \left[ \begin{array}{l}{p} \\ {q} \\ {r}\end{array}\right]$
+
+where $T_{x}=\tan (x)$.
+
+As shown in Figure~\ref{fig:quad_frame} and stated in assumption~\ref{as:inertia}, the drone is symmetric with the arms aligned with the body axes. Therefore, the inertia matrix $\textbf{I}$ is diagonal, and $I_{xx} = I_{yy}$:
+
+ $$\boldsymbol{I}=\left[ \begin{array}{ccc}{I_{x x}} & {0} & {0} \\ {0} & {I_{y y}} & {0} \\ {0} & {0} & {I_{z z}}\end{array}\right]$$
+ 
+ \subsection{Quadrotor Dynamics}
+
+
+% As stated in assumption~\ref{as:Ir}, 
 
 %Problem, dynamics and assumptions. Minimize integral of dt from t0 to tf = tf subject to the dynamics, gates, starting point and constraints (zmin).
 
