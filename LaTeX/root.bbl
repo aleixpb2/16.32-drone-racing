@@ -5,4 +5,17 @@ S.~Zhang, C.~Zhu, J.~K.~O. Sin, and P.~K.~T. Mok.
 \newblock A novel ultrathin elevated channel low-temperature poly-{Si} {TFT}.
 \newblock 20:569--571, November 1999.
 
+\bibitem{patterson2014gpops}
+Michael~A Patterson and Anil~V Rao.
+\newblock {GPOPS-II}: A {MATLAB} software for solving multiple-phase optimal
+  control problems using hp-adaptive gaussian quadrature collocation methods
+  and sparse nonlinear programming.
+\newblock {\em ACM Transactions on Mathematical Software (TOMS)}, 41(1):1,
+  2014.
+
+\bibitem{gpops_guide}
+Michael~A Patterson and Anil~V Rao.
+\newblock {GPOPS-II}: A general-purpose {MATLAB} software for solving
+  multiple-phase optimal control problems, 2016.
+
 \end{thebibliography}

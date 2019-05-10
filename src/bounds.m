@@ -46,7 +46,7 @@ u_min = [T_min, tau_phi_min, tau_theta_min, tau_psi_min];
 u_max = [T_max, tau_phi_max, tau_theta_max, tau_psi_max];
 
 % Path constraint
-z_min = -10;  % TODO
+z_min = 0;
 z_max = 100;
 
 for i_phase = 1:n_gates
@@ -71,7 +71,7 @@ for i_phase = 1:n_gates
     bounds.phase(i_phase).control.lower = u_min;
     bounds.phase(i_phase).control.upper = u_max;
 
-    bounds.phase(i_phase).path.lower  = z_min;  % z constraint TODO
+    bounds.phase(i_phase).path.lower  = z_min;
     bounds.phase(i_phase).path.upper  = z_max;
     
     % Phase continuity constraints (n-1)

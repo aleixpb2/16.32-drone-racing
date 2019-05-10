@@ -90,7 +90,7 @@ The paper is structured as follows: Section~\ref{s:problem} presents the formula
 \section{PROBLEM FORMULATION}\label{s:problem}
 
 Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}. %TODO CITE
-This section presents the assumptions presumed, the geometry of a quadrotor, its dynamics, the state-space model used and the mathematical formulation of the problem in hand.
+This section presents the assumptions presumed, the geometry of a quadrotor, its dynamics, the state-space model used, and the mathematical formulation of the problem in hand.
 
 \subsection{Assumptions}
 
@@ -296,7 +296,7 @@ that is, a column vector of $4 \cdot 3 = 12$ components that contains the inerti
  \right]
  $$
 
-\subsection{Mathematical Formulation}
+\subsection{Mathematical Formulation}\label{subs:math_form}
 The problem in hand consists of minimizing the time a drone takes to complete a race, that is, to cross all the gates in a specific order as fast as possible. In this paper, the gates are considered point constraints only, and it does not matter the direction of the velocity vector. This can be formulated mathematically as an optimal control problem:
 
 \bigskip
@@ -309,21 +309,65 @@ subject to:
 
 $$ \bm{\dot{X}} = f(\boldsymbol{X}, \boldsymbol{U}) $$
 
+$$ \bm{X}(0) = 0 $$
+
+\quad $ \bm{x}(t_i) = \bm{g_i},$ \quad $t_i < t_{i+1} $ for $i = 1 .. n_{gates}-1$
+
+$$ z \ge 0 $$
+
+$$ 0 \le T \le T_{max} $$
+$$  |\tau_{\phi}| \le \tau_{\phi,max} $$
+$$  |\tau_{\theta}| \le \tau_{\theta,max} $$
+$$  |\tau_{\psi}| \le \tau_{\psi,max} $$
+
+The first constraint imposes the quadrotor dynamics. The second one, states that the initial state of the drone is 0, that is, the drone is stopped in the origin and the body axes match the global axes. The third constraint are the gates: the drone's position $\bm{x}$ has to match the gates' positions $\bm{g_i}$ in increasing times (that is, the gates have to be crossed in order, from number 1 to number $n_{gates}$). The next constraint ensures that the drone will not crash against the ground. The last four constraints limit the control inputs, necessary to account for the limitations of the quadrotor's propellers and motors.
+
+\section{PROBLEM IMPLEMENTATION}\label{s:impl}
+
+The problem was implemented in GPOPS-II \cite{patterson2014gpops}, a MATLAB software to solve optimal control problems. As shown in GPOPS-II's User Guide \cite{gpops_guide}, a program must have three main functions: the main, the continuous and the endpoint function, which are explained in the following subsections.
+
+To specify the gate constraints, the program is divided in $n_{gates}$ phases. The first phase is from the initial state (where all the states are 0) to the first gate, the second phase is from the end of the first phase to the second gate, and so on.
+
+\subsection{Main Function}
+In this function, the race and drone parameters are loaded, the program is set up and the bounds and guesses are specified:
+\begin{itemize}
+	\item \textbf{Bounds:} the bounds limit the states and controls allowed for each phase. The time, position, velocity, orientation and rates are limited to realistic values, although the quadrotor could technically surpass them. For example, this work does not allow the drone to fly upside down or faster than 50 $m/s$. As for the control inputs, they are limited to the allowed values as shown in Subsection~\ref{subs:math_form}.
+	
+	Additionally, the z is limited to values greater than 0 to avoid the drone crashing into the ground, the initial state is set to 0, the difference of states in contiguous phases is set to 0 and the final position for each phase is set to the corresponding gate.
+	\item \textbf{Guesses:} they set values to the time, state and control for each phase to help the algorithm converge.
+\end{itemize}
+
+Finally, the data is saved and plotted using auxiliary functions.
+
+\subsection{Continuous Function}
+
+This function contains all the dynamics explained in Section~\ref{s:problem}. For every phase, $\bm{\dot{X}}$ is computed and returned. Additionally, the path constraint variable is returned, that is, the state $z$. As mentioned before, its minimum is set to 0 using the lower and upper path constraint bounds.
+
+\subsection{Endpoint Function}
+
+The endpoint function returns the objective function, which is the final time of the last phase, and also returns the difference of the states and times between contiguous phases as something called `eventgroup'. This difference is set to 0 by the bounds, like previously explained.
+
+\subsection{Video Functions}
+
+To make the video of the drone performing the race...
 
 
-The dynamics, gates, starting point and constraints (zmin).
+\section{RESULTS}\label{s:res}
 
+\subsection{Drone Parameters}
+A
 
+\subsection{Experiments}
 
-\section{RESULTS}\label{s:exp}
+Show simple experiment with/out considering z constraint. Show gates.
 
-Explain solved using GPOPS.
+Show gates and plots of final experiment.
 
-  
+The video can be found in ...
 
 \section{CONCLUSIONS}\label{s:conclusions}
 
-Conclusions
+Copy abstract... Future work could impose additional gate constraints such as limiting the velocity to a cone, although this constraint is not noticeable if the gates are positioned one (more or less) in front of the other as would happen in a real race.
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -337,8 +381,6 @@ Conclusions
 \section*{APPENDIX}
 
 Nothing...
-
-Citation: \cite{IEEEexample:article_typical}.
 
 %%%%%%%%%%%%%%%%%%% CHECK BIB MANUAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{thebibliography}{99}

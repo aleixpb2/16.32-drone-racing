@@ -40,7 +40,3 @@ saveToExcel(solution);
 
 % Plot
 dronePlot
-
-% TODO: search todos in the code. Repeat results for small u_taus, now they
-% reach the rate limit. Increase the limits and inertias too.
-
