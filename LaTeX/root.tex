@@ -97,7 +97,7 @@ The formulation that follows considers the following assumptions:
 	\item The maximum and minimum altitudes of the quadrotor are similar and thus the air density and gravity are constants.
 	\item The vehicle is flying in zero-wind conditions.
 	\item No ground effect is considered.
-	\item \label{as:Ir} The angular velocities of the rotors are similar, and the rotors' inertia $I_r$ is small.
+	\item \label{as:Ir} The angular velocities of the rotors are similar, and the rotors' inertia is small.
 	\item \label{as:inertia} The quadrotor is symmetrical with its four arms aligned with the body x- and y-axes.
 	\item The propellers are rigid and thus blade flapping does not occur.
 \end{enumerate}
@@ -149,7 +149,35 @@ As shown in Figure~\ref{fig:quad_frame} and stated in assumption~\ref{as:inertia
  
  \subsection{Quadrotor Dynamics}
 
+The force $f_i$ created by the angular velocity of rotor $i$, denoted with $\omega_i$, in the direction of the rotor axis is:
 
+$$f_{i}=k \omega_{i}^{2}$$
+
+Additionally, torque $\tau_{M_i}$ is created around the rotor axis:
+
+$$\tau_{M_{i}} = b \omega_{i}^{2} + I_{r} \dot{\omega}_{i} $$
+
+where the lift constant is $k$, the drag constant is $b$ and the inertia moment of the rotor is $I_{r}$. As assumption~\ref{as:Ir} considered, the rotor's inertia is small, and $\dot{\omega}_{i}$ is also usually small. Therefore, this term can be omitted.
+
+The rotors create thrust $T$ in the direction of the body z-axis, and torque $\bm{\tau_B}$ consists of torques $\tau_\phi, \tau_\theta, \tau_\psi$ in the direction of the corresponding body frame angles:
+
+$$T=\sum_{i=1}^{4} f_{i}=k \sum_{i=1}^{4} \omega_{i}^{2}, \quad \quad \boldsymbol{T}^{B}=\left[ \begin{array}{c}{0} \\ {0} \\ {T}\end{array}\right]$$
+
+$$
+\boldsymbol{\tau}_{B}=\left[ \begin{array}{c}{\tau_{\phi}} \\ {\tau_{\theta}} \\ {\tau_{\psi}}\end{array}\right]=
+\left[ \begin{array}{c}{l k\left(-\omega_{2}^{2}+\omega_{4}^{2}\right)} \\ {l k\left(-\omega_{1}^{2}+\omega_{3}^{2}\right)} \\ {\sum_{i=1}^{4} \tau_{M_{i}}}\end{array}\right]
+$$
+
+in which l is the distance between the rotor and the center of mass of the quadcopter.
+
+The Newton-Euler equations for the quadrotor are:
+
+$$m \ddot{\boldsymbol{\xi}}=\boldsymbol{G}+\boldsymbol{R} \boldsymbol{T}_{B}$$
+
+$$\left[ \begin{array}{c}{\ddot{x}} \\ {\ddot{y}} \\ {\ddot{z}}\end{array}\right]=-g \left[ \begin{array}{l}{0} \\ {0} \\ {1}\end{array}\right]+\frac{T}{m} \left[ \begin{array}{c}{C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {C_{\theta} C_{\phi}}\end{array}\right]$$
+
+where g is Earth's gravity, 9.81 $m/s^2$.
+ 
 % As stated in assumption~\ref{as:Ir}, 
 
 %Problem, dynamics and assumptions. Minimize integral of dt from t0 to tf = tf subject to the dynamics, gates, starting point and constraints (zmin).
