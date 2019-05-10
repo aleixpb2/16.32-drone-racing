@@ -64,6 +64,8 @@ Optimal Control for Autonomous Drone Racing
 % TODO: MORE dynamics references
 % TODO: make video, add to rar, and add as well the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
 % TODO remove "we"
+% TODO: nu eq too big
+% TODO: read project description (stellar)
 % TODO: read sheets, they have more TODOS
 % TODO: TODOS in the code
 
@@ -88,7 +90,7 @@ The paper is structured as follows: Section~\ref{s:problem} presents the formula
 \section{PROBLEM FORMULATION}\label{s:problem}
 
 Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}. %TODO CITE
-This section presents the geometry of a quadrotor, its dynamics and the mathematical formulation of the problem in hand.
+This section presents the assumptions presumed, the geometry of a quadrotor, its dynamics, the state-space model used and the mathematical formulation of the problem in hand.
 
 \subsection{Assumptions}
 
@@ -176,11 +178,140 @@ $$m \ddot{\boldsymbol{\xi}}=\boldsymbol{G}+\boldsymbol{R} \boldsymbol{T}_{B}$$
 
 $$\left[ \begin{array}{c}{\ddot{x}} \\ {\ddot{y}} \\ {\ddot{z}}\end{array}\right]=-g \left[ \begin{array}{l}{0} \\ {0} \\ {1}\end{array}\right]+\frac{T}{m} \left[ \begin{array}{c}{C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {C_{\theta} C_{\phi}}\end{array}\right]$$
 
-where g is Earth's gravity, 9.81 $m/s^2$.
+where g is Earth's gravity, 9.81 $m/s^2$. Additionally:
+ $$\boldsymbol{I} \dot{\boldsymbol{\nu}}+\boldsymbol{\nu} \times(\boldsymbol{I} \boldsymbol{\nu})+\mathbf{\Gamma}=\boldsymbol{\tau_B}$$
  
-% As stated in assumption~\ref{as:Ir}, 
+ $$\boldsymbol{\dot{\nu}}=\boldsymbol{I}^{-1}\left(-\left[ \begin{array}{c}{p} \\ {q} \\ {r}\end{array}\right] \times \left[ \begin{array}{c}{I_{x x} p} \\ {I_{y y} q} \\ {I_{z z} r}\end{array}\right]-I_{r} \left[ \begin{array}{c}{p} \\ {q} \\ {r}\end{array}\right] \times \left[ \begin{array}{c}{0} \\ {0} \\ {1}\end{array}\right] \omega_{\Gamma}+\boldsymbol{\tau_B}\right)$$
+ 
+ $$
+ \begin{array}{c}
+ \left[ \begin{array}{c}{\dot{p}} \\ {\dot{q}} \\ {\dot{r}}\end{array}\right]= 
+ \left[ \begin{array}{c}{\left(I_{y y}-I_{z z}\right) q r / I_{x x}} \\ {\left(I_{z z}-I_{x x}\right) p r / I_{y y}} \\ {(I_{x x}-I_{y y}) p q / I_{z z}}\end{array}\right] 
+ - I_{r} \left[ \begin{array}{c}{q / I_{x x}} \\ {-p / I_{y y}} \\ {0}\end{array}\right] \omega_{\Gamma} \\
+ + \left[ \begin{array}{c}{\tau_{\phi} / I_{x x}} \\ {\tau_{\theta} / I_{y y}} \\ {\tau_{\psi} / I_{z z}}\end{array}\right]
+ \end{array}
+ $$
+ 
+ where $\omega_\Gamma = \omega_1 - \omega_2 + \omega_3 - \omega_4$. By assumption~\ref{as:Ir}, the term that includes $I_r$ and $\omega_\Gamma$ can be omitted.
+ 
+ Finally, this work considers aerodynamic drag caused by the vehicle's translation. Therefore, the revised Netwon equation is:
+ 
+  $$
+  \begin{array}{l}
+  \left[ \begin{array}{l}{\ddot{x}} \\ {\ddot{y}} \\ {\ddot{z}}\end{array}\right]=-g \left[ \begin{array}{l}{0} \\ {0} \\ {1}\end{array}\right]+\frac{T}{m} \left[ \begin{array}{c}{C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {C_{\theta} C_{\phi}}\end{array}\right] \\
+  \quad \quad \quad \quad  - \frac{1}{m} \left[ \begin{array}{ccc}{A_{x}} & {0} & {0} \\ {0} & {A_{y}} & {0} \\ {0} & {0} & {A_{z}}\end{array}\right] \left[ \begin{array}{c}{\dot{x}} \\ {\dot{y}} \\ {\dot{z}}\end{array}\right]
+  \end{array}
+  $$
+  
+  where $A_x, A_y$, and $A_z$ are the drag force coefficients for velocities in the corresponding directions of the inertial frame.
+ 
+\subsection{State-space Representation}
 
-%Problem, dynamics and assumptions. Minimize integral of dt from t0 to tf = tf subject to the dynamics, gates, starting point and constraints (zmin).
+The state of the quadrotor can be represented as follows:
+
+ $$ \bm{X} = \left[ 
+ \begin{array}{c}
+  {\bm{x}}  \\
+  {\bm{\dot{x}}}  \\
+  {\bm{\eta}}  \\
+  {\bm{\nu}}
+  \end{array}\right]$$
+
+that is, a column vector of $4 \cdot 3 = 12$ components that contains the inertial position, the inertial velocity, the Euler angles and the angular velocities in the body frame. The control inputs are:
+
+ $$ \bm{U} = \left[ 
+ \begin{array}{c}
+ {T}  \\
+ {\tau_\phi}  \\
+ {\tau_\theta}  \\
+ {\tau_\psi}
+ \end{array}\right]$$
+ 
+ that is, the total thrust $T$ and the torques $\tau$ that cause a roll, pitch, and yaw angle change, respectively.
+ 
+ The dynamics previously derived can be assembled in vector $\bm{\dot{X}} = f(\boldsymbol{X}, \boldsymbol{U})$, which represents the change of the state as a function of the state and the inputs. That is:
+ 
+ $$
+ \dot{\boldsymbol{X}} =
+ \left[
+ \begin{array}{c}
+ \dot{x} \\
+ {}\\
+ \dot{y} \\
+ {}\\
+ \dot{z} \\
+ {}\\
+ {}\\
+ \ddot{x} \\
+ {}\\
+ \ddot{y} \\
+ {}\\
+ \ddot{z} \\
+ {}\\
+ {}\\
+ \dot{\phi} \\
+ {}\\
+ \dot{\theta} \\
+ {}\\
+ \dot{\psi} \\
+ {}\\
+ {}\\
+ \dot{p} \\
+ {}\\
+ \dot{q} \\
+ {}\\
+ \dot{r}
+ \end{array}
+ \right]
+ =
+ \left[
+ \begin{array}{l}
+ \dot{x} \\
+ {}\\
+ \dot{y} \\
+ {}\\
+ \dot{z} \\
+ {}\\
+ {}\\
+ \frac{T}{m}[C_{\psi} S_{\theta} C_{\phi} + S_{\psi} S_{\phi}] - \frac{A_x}{m} \dot{x} \\
+ {}\\
+ \frac{T}{m}[ S_{\psi} S_{\theta} C_{\phi} - C_{\psi} S_{\phi}] - \frac{A_y}{m} \dot{y} \\
+ {}\\
+ -g+\frac{T}{m}[C_{\theta} C_{\phi}] - \frac{A_z}{m} \dot{z} \\
+ {}\\
+ {}\\
+ p+ q[S_{\phi} T_{\theta}] + r[C_{\phi} T_{\theta}] \\
+ {}\\
+ q[C_{\phi}]-r[S_{\phi}] \\
+ {}\\
+ q \frac{S_{\phi}}{C_{\theta}} + r \frac{C_{\phi}}{C_{\theta}} \\
+ {}\\
+ {}\\
+ \frac{I_{yy}-I_{zz}}{I_{xx}} q r  +\frac{\tau_{\phi}}{I_{xx}} \\
+ {}\\
+ \frac{I_{zz}-I_{xx}}{I_{yy}} p r +\frac{\tau_{\theta}}{I_{yy}} \\
+ {}\\
+ \frac{I_{xx}-I_{yy}}{I_{zz}} p q +\frac{\tau_{\psi}}{I_{zz}}
+ \end{array}
+ \right]
+ $$
+
+\subsection{Mathematical Formulation}
+The problem in hand consists of minimizing the time a drone takes to complete a race, that is, to cross all the gates in a specific order as fast as possible. In this paper, the gates are considered point constraints only, and it does not matter the direction of the velocity vector. This can be formulated mathematically as an optimal control problem:
+
+\bigskip
+
+Minimize \quad $\int_{t_0}^{t_f} 1 dt = \int_{0}^{t_f} 1 dt = t_f$
+
+\bigskip
+
+subject to:
+
+$$ \bm{\dot{X}} = f(\boldsymbol{X}, \boldsymbol{U}) $$
+
+
+
+The dynamics, gates, starting point and constraints (zmin).
 
 
 
