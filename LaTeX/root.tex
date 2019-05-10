@@ -29,13 +29,22 @@
 %\usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
 \usepackage{balance}
+\usepackage{hyperref}
+\usepackage{float}
+\hypersetup{
+	colorlinks   = true,  % Colour links instead of ugly boxes
+	urlcolor     = black, % Colour for external hyperlinks
+	linkcolor    = black, % Colour of internal links
+	citecolor    = black  % Colour of citations
+}
+\usepackage{bm}
 
 \title{\LARGE \bf
 Optimal Control for Autonomous Drone Racing
 }
 
 \author{Aleix Paris$^{1}$% <-this % stops a space
-\thanks{$^{1}$Graduate Research Assistant in the Aerospace Controls Laboratory,
+\thanks{$^{1}$Graduate Research Assistant at the Aerospace Controls Laboratory,
         MIT, 77 Massachusetts Ave., Cambridge, MA, USA
         {\tt\small aleix@mit.edu}}%
 }
@@ -48,7 +57,12 @@ Optimal Control for Autonomous Drone Racing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TODO: cite GPOPS guide and files under "Literature"
-% TODO: show drone image
+% TODO: show all images in the folder
+% TODO: MORE dynamics references
+% TODO: make video, add to rar, and add as well the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
+% TODO: read sheets, they have more TODOS
+% TODO: TODOS in the code
+
 \begin{abstract}
 
 This paper studies the problem of optimal control of a quadrotor to minimize the time it takes it to pass trough several waypoints, that is, to finish a race.
@@ -64,27 +78,43 @@ The Red Bull Air Race, where airplanes cross gates to end a circuit as fast as p
 
 MENTION PARKER AND AUTONOMOUS DRONE RACING COMPETITIONS...
 
+The paper is structured as follows: Section~\ref{s:problem} presents the formulation of this problem, Section...
+
 
 \section{PROBLEM FORMULATION}\label{s:problem}
 
-Problem, dynamics and assumptions. Minimize t subject to...
+Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}.%TODO CITE
+This section presents the geometry of a quadrotor, its dynamics and the mathematical formulation of the problem in hand.
+
+\subsection{Quadrotor geometry and notation}
+
+The quadrotor's absolute linear position is defined in the inertial frame with the vector \bm{$\xi$}. Similarly, the attitude (angular position of the drone with respect to the inertial frame) is defined with the vector \bm{$\eta$}. Roll angle $\phi$ determines the rotation of the vehicle around the x-axis, pitch angle $\theta$ defines a rotation around the y-axis, and yaw angle $\psi$ determines the quadrotor's rotation around the z-axis:
 
 
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
- 
- Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat. 
+$$\bm{\xi}=\left[ \begin{array}{l}{x} \\ {y} \\ {z}\end{array}\right],
+\quad \bm{\eta}=\left[ \begin{array}{l}{\phi} \\ {\theta} \\ {\psi}\end{array}\right]$$
+
+The origin of the body frame, indicated with a B, is the center of mass of the quadrotor. In this frame, the vehicle's linear velocities \bm{$V_B$} and angular velocities \bm{$\nu$} are:
+
+$$\bm{V}_{B}=\left[ \begin{array}{c}{v_{x, B}} \\ {v_{y, B}} \\ {v_{z, B}}\end{array}\right], \quad \bm{\nu}=\left[ \begin{array}{l}{p} \\ {q} \\ {r}\end{array}\right]$$
+
+% TODO: delete VB?
+
+The rotation from the body frame to the inertial frame can be defined with the matrix
+
+$$\bm{R}=\left[ \begin{array}{ccc}{C_{\psi} C_{\theta}} & {C_{\psi} S_{\theta} S_{\phi}-S_{\psi} C_{\phi}} & {C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} C_{\theta}} & {S_{\psi} S_{\theta} S_{\phi}+C_{\psi} C_{\phi}} & {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {-S_{\theta}} & {C_{\theta} S_{\phi}} & {C_{\theta} C_{\phi}}\end{array}\right]$$
+
+in which $S_{x}=\sin (x)$ and $C_{x}=\cos (x)$. Note that this rotation matrix is orthogonal and thus the rotation matrix from the inertial frame to the body frame is $\bm{R^{-1} = \bm{R^T}}$.
+
+%Problem, dynamics and assumptions. Minimize integral of dt from t0 to tf = tf subject to the dynamics, gates, starting point and constraints (zmin).
+
+
 
 \section{RESULTS}\label{s:exp}
 
 Explain solved using GPOPS.
 
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
- 
- Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat.
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at est non nisl mattis condimentum a a orci. Curabitur id consequat ex. Praesent porta facilisis turpis, vitae tristique est faucibus id. In eleifend mi eget scelerisque venenatis. Fusce erat sapien, commodo vitae venenatis at, placerat vitae nibh. Sed in augue eu mi rutrum commodo. In dapibus ex non nulla tincidunt, eu finibus enim hendrerit. Cras convallis nisl posuere, malesuada nunc ac, placerat mi. Mauris rhoncus fringilla molestie. Morbi quis mattis felis, sed hendrerit lorem. Pellentesque non nunc urna. Nullam condimentum nibh arcu, sit amet ornare nulla scelerisque ac. Donec vel varius leo.
   
-  Ut posuere dolor id ultrices porta. Etiam sit amet accumsan tortor, eu placerat lectus. Ut dictum metus sit amet aliquam suscipit. Quisque et nulla sapien. Sed sapien mi, faucibus eget efficitur a, luctus ac sem. Praesent sagittis diam ac libero vestibulum fermentum. Sed vitae quam finibus, ullamcorper quam ac, venenatis est. Cras non lacus feugiat, iaculis ante et, ultrices quam. Donec purus sapien, maximus ullamcorper convallis ac, rutrum sed ligula. Nulla vitae mollis odio. Nam nec vehicula erat. 
-
 
 \section{CONCLUSIONS}\label{s:conclusions}
 

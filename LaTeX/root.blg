@@ -1,7 +1,50 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: root.aux
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: root.aux
 The style file: unsrt.bst
 Database file #1: IEEEexample.bib
 Warning--string name "ieee_j_edl" is undefined
---line 167 of file IEEEexample.bib
+--line 333 of file IEEEexample.bib
 Warning--empty journal in IEEEexample:article_typical
+You've used 1 entry,
+            1791 wiz_defined-function locations,
+            452 strings with 3703 characters,
+and the built_in function-call counts, 272 in all, are:
+= -- 20
+> -- 14
+< -- 0
++ -- 5
+- -- 4
+* -- 24
+:= -- 50
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 1
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 9
+empty$ -- 24
+format.name$ -- 4
+if$ -- 55
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 1
+pop$ -- 3
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 3
+stack$ -- 0
+substring$ -- 21
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 2
+width$ -- 2
+write$ -- 12
 (There were 2 warnings)
