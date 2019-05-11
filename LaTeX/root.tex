@@ -40,6 +40,7 @@
 	citecolor    = black  % Colour of citations
 }
 \usepackage{bm}
+\usepackage{caption} %% same behavior as hypcap: links take you to images instead of captions
 
 \title{\LARGE \bf
 Optimal Control for Autonomous Drone Racing
@@ -58,20 +59,14 @@ Optimal Control for Autonomous Drone Racing
 \pagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO: use bm instead of boldsymbol
-% TODO: cite refs in "Literature"
-% TODO: show all images in the folder
-% TODO: MORE dynamics references
-% TODO: make video, add to rar, and add as well the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
-% TODO remove "we"
+
+% TODO: add video and the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
 % TODO: nu eq too big
-% TODO: read project description (stellar)
 % TODO: read sheets, they have more TODOS
-% TODO: TODOS in the code
 
 \begin{abstract}
 
-This paper studies the problem of optimal control of a quadrotor to minimize the time it takes it to pass trough several waypoints, that is, to finish a race.
+In recent years there has been interest in the subject of drone racing. This paper studies the problem of optimal control of a quadrotor to minimize the time it takes it to pass trough several waypoints, that is, to finish a race, and calculates the trajectory it will follow according to its dynamics.
 
 \end{abstract}
 
@@ -79,18 +74,16 @@ This paper studies the problem of optimal control of a quadrotor to minimize the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}\label{s:intro}
 
-Optimal control problems have been widely studied...
-The Red Bull Air Race, where airplanes cross gates to end a circuit as fast as possible is an example of a similar problem that has been studied... Nowadays, every team has the role of a `tactician', which is in charge of...
+Optimal control problems have been widely studied in literature. In particular, in the aerospace sector they proved useful in applications such as the space exploration. The Red Bull Air Race, where airplanes cross gates to end a circuit as fast as possible is another example of an optimal control problem in the aerospace industry. Nowadays, every team has the role of a `tactician', which is in charge of calculating what control inputs the pilot has to apply to their aircraft to maximize performance. This role has proved to be essential for teams to be competitive.
 
-MENTION PARKER AND AUTONOMOUS DRONE RACING COMPETITIONS...
+More recently, researchers have studied the problem of drone racing. Authors in \cite{jung2018perception} and \cite{kaufmann2018deep} apply deep learning techniques, while in \cite{jung2018direct}, authors develop a framework based on direct visual servoing and leg-by-leg planning for navigating in obstacle-dense environments as posed in the 2016 IROS Autonomous Drone Racing Challenge. In this paper, this problem is solved using the software tool GPOPS-II \cite{patterson2014gpops} with the objective to find the optimal control inputs that could allow a drone to autonomously finish a race.
 
-The paper is structured as follows: Section~\ref{s:problem} presents the formulation of this problem, Section...
+The paper is structured as follows: Section~\ref{s:problem} presents the formulation of this problem, Section~\ref{s:impl} explains how this problem was implemented in GPOPS, Section~\ref{s:res} discusses the results obtained and, finally, Section~\ref{s:conclusions} concludes this paper.
 
 
 \section{PROBLEM FORMULATION}\label{s:problem}
 
-Several authors have studied quadrotor dynamics \cite{IEEEexample:article_typical}. %TODO CITE
-This section presents the assumptions presumed, the geometry of a quadrotor, its dynamics, the state-space model used, and the mathematical formulation of the problem in hand.
+Several authors (\cite{bouabdallah2007full}, \cite{chovancova2014mathematical}, \cite{luukkonen2011modelling}, \cite{beard2008quadrotor}) have studied quadrotor dynamics. This section presents the assumptions presumed, the geometry of a quadrotor, its dynamics, the state-space model used, and the mathematical formulation of the problem in hand.
 
 \subsection{Assumptions}
 
@@ -104,6 +97,8 @@ The formulation that follows considers the following assumptions:
 	\item The propellers are rigid and thus blade flapping does not occur.
 \end{enumerate}
 
+In the next subsections, the quadrotor geometry, notation and dynamics are derived, and are mostly based on \cite{luukkonen2011modelling}.
+
 \subsection{Quadrotor Geometry and Notation}
 
 The quadrotor's absolute linear position is defined in the inertial frame with the vector \bm{$\xi$}. Similarly, the attitude (angular position of the drone with respect to the inertial frame) is defined with the vector \bm{$\eta$}. Roll angle $\phi$ determines the rotation of the vehicle around the x-axis, pitch angle $\theta$ defines a rotation around the y-axis, and yaw angle $\psi$ determines the quadrotor's rotation around the z-axis:
@@ -116,14 +111,12 @@ The origin of the body frame, indicated with a B, is the center of mass of the q
 
 $$\bm{V}_{B}=\left[ \begin{array}{c}{v_{x, B}} \\ {v_{y, B}} \\ {v_{z, B}}\end{array}\right], \quad \bm{\nu}=\left[ \begin{array}{l}{p} \\ {q} \\ {r}\end{array}\right]$$
 
-% TODO: delete VB?
-
 Figure~\ref{fig:quad_frame} shows the inertial and body frame, as well as the Euler and angular velocity angles defined previously.
 
 \begin{figure}[!htpb]
 	\centering
 	\includegraphics[width=1.0\linewidth]{Images/quad_frame.png}
-	\caption{Inertial and body-fixed frame of the quadrotor, showing the Euler and angular velocity angles [?] %TODO CITE
+	\caption{Inertial and body-fixed frame of the quadrotor, showing the Euler and angular velocity angles [?] %TODO CITE Mathematical modelling and...
 		}
 	\label{fig:quad_frame}
 \end{figure}
@@ -147,7 +140,7 @@ where $T_{x}=\tan (x)$.
 
 As shown in Figure~\ref{fig:quad_frame} and stated in assumption~\ref{as:inertia}, the drone is symmetric with the arms aligned with the body axes. Therefore, the inertia matrix $\textbf{I}$ is diagonal, and $I_{xx} = I_{yy}$:
 
- $$\boldsymbol{I}=\left[ \begin{array}{ccc}{I_{x x}} & {0} & {0} \\ {0} & {I_{y y}} & {0} \\ {0} & {0} & {I_{z z}}\end{array}\right]$$
+ $$\bm{I}=\left[ \begin{array}{ccc}{I_{x x}} & {0} & {0} \\ {0} & {I_{y y}} & {0} \\ {0} & {0} & {I_{z z}}\end{array}\right]$$
  
  \subsection{Quadrotor Dynamics}
 
@@ -163,10 +156,10 @@ where the lift constant is $k$, the drag constant is $b$ and the inertia moment 
 
 The rotors create thrust $T$ in the direction of the body z-axis, and torque $\bm{\tau_B}$ consists of torques $\tau_\phi, \tau_\theta, \tau_\psi$ in the direction of the corresponding body frame angles:
 
-$$T=\sum_{i=1}^{4} f_{i}=k \sum_{i=1}^{4} \omega_{i}^{2}, \quad \quad \boldsymbol{T}^{B}=\left[ \begin{array}{c}{0} \\ {0} \\ {T}\end{array}\right]$$
+$$T=\sum_{i=1}^{4} f_{i}=k \sum_{i=1}^{4} \omega_{i}^{2}, \quad \quad \bm{T}^{B}=\left[ \begin{array}{c}{0} \\ {0} \\ {T}\end{array}\right]$$
 
 $$
-\boldsymbol{\tau}_{B}=\left[ \begin{array}{c}{\tau_{\phi}} \\ {\tau_{\theta}} \\ {\tau_{\psi}}\end{array}\right]=
+\bm{\tau}_{B}=\left[ \begin{array}{c}{\tau_{\phi}} \\ {\tau_{\theta}} \\ {\tau_{\psi}}\end{array}\right]=
 \left[ \begin{array}{c}{l k\left(-\omega_{2}^{2}+\omega_{4}^{2}\right)} \\ {l k\left(-\omega_{1}^{2}+\omega_{3}^{2}\right)} \\ {\sum_{i=1}^{4} \tau_{M_{i}}}\end{array}\right]
 $$
 
@@ -174,7 +167,7 @@ in which l is the distance between the rotor and the center of mass of the quadc
 
 The Newton-Euler equations for the quadrotor are:
 
-$$m \ddot{\boldsymbol{\xi}}=\boldsymbol{G}+\boldsymbol{R} \boldsymbol{T}_{B}$$
+$$m \ddot{\bm{\xi}}=\bm{G}+\bm{R} \bm{T}_{B}$$
 
 $$\left[ \begin{array}{c}{\ddot{x}} \\ {\ddot{y}} \\ {\ddot{z}}\end{array}\right]=-g \left[ \begin{array}{l}{0} \\ {0} \\ {1}\end{array}\right]+\frac{T}{m} \left[ \begin{array}{c}{C_{\psi} S_{\theta} C_{\phi}+S_{\psi} S_{\phi}} \\ {S_{\psi} S_{\theta} C_{\phi}-C_{\psi} S_{\phi}} \\ {C_{\theta} C_{\phi}}\end{array}\right]$$
 
@@ -347,7 +340,7 @@ This function contains all the dynamics explained in Section~\ref{s:problem}. Fo
 
 The endpoint function returns the objective function, which is the final time of the last phase, and also returns the difference of the states and times between contiguous phases as something called `eventgroup'. This difference is set to 0 by the bounds, like previously explained.
 
-\subsection{Video Functions}
+\subsection{Video Functions}\label{subs:video}
 
 To make the video of the drone performing the race, the time, position and orientation vectors obtained with GPOPS were saved to an Excel file, which was read by a Python script. Using ROS \cite{quigley2009ros}, the script publishes topics from which Gazebo \cite{koenig2004design} (a simulation environment for ROS) is subscribed. These topics include the position and orientation of the drone, and are published with a period that matches the time difference of every point. A quadrotor model in Gazebo receives the ROS messages and moves and rotates as they indicate, thus giving the impression that the drone is moving. Cuboids were added to the environment to represent the gates.
 
@@ -377,9 +370,9 @@ The following quadrotor parameters were used:
 		$A_y$     & 0.10 & $kg / s$  \\
 		$A_z$     & 0.20 & $kg / s$  \\
 		$T_{max}$ & 25   & $N$  \\
-		$\tau_{\phi, max}$   & 5    & $-$  \\  % TODO
-		$\tau_{\theta, max}$ & 5    & $-$  \\
-		$\tau_{\psi, max}$   & 1.5  & $-$  \\		
+		$\tau_{\phi, max}$   & 5    & $ rad/s^2 \cdot kg \cdot m^2$  \\
+		$\tau_{\theta, max}$ & 5    & $ rad/s^2 \cdot kg \cdot m^2$  \\
+		$\tau_{\psi, max}$   & 1.5  & $ rad/s^2 \cdot kg \cdot m^2$  \\		
 	%	\specialrule{.1em}{.05em}{.00em} 
 	\end{tabular}
 \end{table}
@@ -387,19 +380,117 @@ The following quadrotor parameters were used:
 \subsection{Experiments}
 
 \subsubsection{Simple experiment without the z constraint}
-A
+At first, a simple experiment was tried where the drone had to go from the origin to a gate located in $g_1=(1, 0, 0.5)$ and where the altitude was not limited to values greater or equal than zero. Figures~\ref{fig:simple_zfree_3d} to~\ref{fig:simple_zfree_controls} show the results obtained: a 3D plot of the trajectory, the 12 states over time and the control inputs over time. The 3D plot and the positions over time show the initial state marked with a dot, and the gates marked with a circle (just one in this case). As it can be seen, at first the thrust is 0 while the pitch control input is the maximum, and the drone falls to z = -0.2. Then, the trust is set to the maximum value and the drone accelerates as fast as possible, as expected. It is interesting to observe that the roll and yaw rates are not zero (actually, the drone moves 5 cm to the direction of positive y). A possible explanation is the difference between the inertia in the x- and y- axis and the inertia in the z-axis.
+
+The decrease of the altitude below 0 is, of course, unrealistic. The following case solves this issue.
+
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zfree/3d.png}
+	\caption{3D plot of the simple experiment without the z constraint}
+	\label{fig:simple_zfree_3d}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zfree/pos_vel.png}
+	\caption{Position and velocity plot of the simple experiment without the z constraint}
+	\label{fig:simple_zfree_pos_vel}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zfree/orient_rates.png}
+	\caption{Orientation and angular rates plot of the simple experiment without the z constraint}
+	\label{fig:simple_zfree_orient_rates}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zfree/controls.png}
+	\caption{Control inputs plot of the simple experiment without the z constraint}
+	\label{fig:simple_zfree_controls}
+\end{figure}
 
 \subsubsection{Simple experiment with z constraint}
 
-A
+In this experiment there is only one gate $g_1=(1, 0, 0.5)$ located in the same place as in the previous case, but now it is imposed that $ z \ge 0$. Figures~\ref{fig:simple_zconstr_3d} to~\ref{fig:simple_zconstr_controls} show the results that were obtained.
+
+In this case, at first the drone applies an average thrust of roughly $mg = 10.8$ N, that is, the thrust needed to hover, while it pitches forward. Therefore, the z is maintained during the first moments and then increases similarly as before. % TODO EXPAND?
+
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zconstr/3d.png}
+	\caption{3D plot of the simple experiment with the z constraint}
+	\label{fig:simple_zconstr_3d}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zconstr/pos_vel.png}
+	\caption{Position and velocity plot of the simple experiment with the z constraint}
+	\label{fig:simple_zconstr_pos_vel}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zconstr/orient_rates.png}
+	\caption{Orientation and angular rates plot of the simple experiment with the z constraint}
+	\label{fig:simple_zconstr_orient_rates}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/simple_zconstr/controls.png}
+	\caption{Control inputs plot of the simple experiment with the z constraint}
+	\label{fig:simple_zconstr_controls}
+\end{figure}
 
 \subsubsection{Complex experiment}
 
-A
+This experiment considers the z constraint explained before and has multiple gates to represent a real drone race. The gates are indicated in Table~\ref{tbl:gates}. The initial position is, as always, the origin. Figures~\ref{fig:final_3d} to~\ref{fig:final_controls} show the results obtained. The variables over time are plotted a different color for each phase.
 
-Show simple experiment with/out considering z constraint. Show gates.
-Show gates and plots of final experiment.
-The video can be found in ...
+\begin{table}[!htpb]
+	\caption[Gates]{\bf Gates for the complex experiment}
+	\label{tbl:gates}
+	\centering
+	\def\arraystretch{1.3}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{cccc}
+		%\specialrule{.1em}{.05em}{.00em} 
+		%\rowcolor{Gray}
+		\textbf{Gate} & \textbf{x} & \textbf{y} & \textbf{z} \\ 
+		\hline
+		$g_1$ & 1 & 0 & 1 \\ 
+		$g_2$ & 1 & 1 & 1 \\ 
+		$g_3$ & 3 & 2 & 3 \\ 
+		$g_4$ & 3 & 1 & 1 \\ 
+		$g_5$ & 5 & 0 & 1 \\ 
+	\end{tabular}
+\end{table}
+
+The trajectory observed in Figure~\ref{fig:final_3d} shows what it could be thought intuitively. In the end of the first phase (from the origin to $g_1$), the quadrotor rolls and pitches to change its velocity to the left, where the second gate is. This kind of anticipation just before going through a gate is characteristic of car and airplane races, and drone racing is not an exception. After going to the second gate with considerable $v_y$, the drone ascends to the third gate, sets the thrust to zero for some seconds to free-fall to the forth gate (2 meters below it and 1 meter to the right) and, finally, it sets its thrust to the maximum until the end to do the final straight leg, finishing at a $v_x$ of almost 8 $m/s$. % TODO EXPAND?
+
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/final_race/3d.png}
+	\caption{3D plot of the complex experiment}
+	\label{fig:final_3d}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/final_race/pos_vel.png}
+	\caption{Position and velocity plot of the complex experiment}
+	\label{fig:final_pos_vel}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/final_race/orient_rates.png}
+	\caption{Orientation and angular rates plot of the complex experiment}
+	\label{fig:final_orient_rates}
+\end{figure}
+\begin{figure}[!htpb]
+	\centering
+	\includegraphics[width=1.0\linewidth]{Images/final_race/controls.png}
+	\caption{Control inputs plot of the complex experiment}
+	\label{fig:final_controls}
+\end{figure}
+
+A video of the drone performing this race was recorded using the procedure explained in Subsection~\ref{subs:video} and it can be found in https://bit.ly/2E2CDAV
 
 \section{CONCLUSIONS}\label{s:conclusions}
 

@@ -2,6 +2,7 @@
 
 global gates n_gates
  
+% Gate for the simple experiment
 % gates(1).x = 1;
 % gates(1).y = 0;
 % gates(1).z = 0.5;
@@ -10,7 +11,6 @@ global gates n_gates
 gates(1).x = 1;
 gates(1).y = 0;
 gates(1).z = 1;
-
 
 gates(2).x = 1;
 gates(2).y = 1;

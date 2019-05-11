@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.25)  10 MAY 2019 20:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.25)  10 MAY 2019 23:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -275,36 +275,68 @@ Package: bm 2014/10/28 v1.1c Bold Symbol Support (DPC/FMi)
 \symboldsymbols=\mathgroup8
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 207.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen120
+\captionmargin@=\dimen121
+\captionwidth=\dimen122
+\caption@tempdima=\dimen123
+\caption@indent=\dimen124
+\caption@parindent=\dimen125
+\caption@hangindent=\dimen126
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \begin {center}{\footnotesize #1}\\{\footnotesize \scshape #2}\end {c
+enter}\@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@te
+mpboxa \hbox {\footnotesize #1.~~ #2}\ifdim \wd \@tempboxa >\hsize \setbox \@te
+mpboxa \hbox {\footnotesize #1.~~ }\parbox [t]{\hsize }{\footnotesize \noindent
+ \unhbox \@tempboxa #2}\else \ifcenterfigcaptions \hbox to\hsize {\footnotesize
+ \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\footnotesize \box \@tempbo
+xa \hfil }\fi \fi \fi .
+\c@ContinuedFloat=\count103
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
 ) (./root.aux)
 \openout1 = `root.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count103
-\scratchdimen=\dimen120
+\scratchcounter=\count104
+\scratchdimen=\dimen127
 \scratchbox=\box29
-\nofMPsegments=\count104
-\nofMParguments=\count105
+\nofMPsegments=\count105
+\nofMParguments=\count106
 \everyMPshowfont=\toks19
-\MPscratchCnt=\count106
-\MPscratchDim=\dimen121
-\MPnumerator=\count107
-\makeMPintoPDFobject=\count108
+\MPscratchCnt=\count107
+\MPscratchDim=\dimen128
+\MPnumerator=\count108
+\makeMPintoPDFobject=\count109
 \everyMPtoPDFconversion=\toks20
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -331,7 +363,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 143.
 )
-Package hyperref Info: Link coloring ON on input line 54.
+Package hyperref Info: Link coloring ON on input line 55.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -339,57 +371,163 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count109
+\c@section@level=\count110
 )
-LaTeX Info: Redefining \ref on input line 54.
-LaTeX Info: Redefining \pageref on input line 54.
-LaTeX Info: Redefining \nameref on input line 54.
+LaTeX Info: Redefining \ref on input line 55.
+LaTeX Info: Redefining \pageref on input line 55.
+LaTeX Info: Redefining \nameref on input line 55.
 
 (./root.out) (./root.out)
 \@outlinefile=\write3
 \openout3 = `root.out'.
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 57.
-LaTeX Font Info:    Try loading font information for U+msa on input line 57.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 58.
+LaTeX Font Info:    Try loading font information for U+msa on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 57.
+LaTeX Font Info:    Try loading font information for U+msb on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 57.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Images/quad_frame.png, id=74, 701.62125pt x 493.845pt>
+<Images/quad_frame.png, id=89, 701.62125pt x 493.845pt>
 File: Images/quad_frame.png Graphic file (type png)
 
 <use Images/quad_frame.png>
-Package pdftex.def Info: Images/quad_frame.png used on input line 125.
+Package pdftex.def Info: Images/quad_frame.png used on input line 118.
 (pdftex.def)             Requested size: 245.71811pt x 172.95383pt.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
-s been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.146 w
-       here $T_{x}=\tan (x)$. <./Images/quad_frame.png>]
-Overfull \hbox (32.23131pt too wide) detected at line 184
+ <./Images/quad_frame.png>]
+Overfull \hbox (32.23131pt too wide) detected at line 177
 [] \OT1/cmr/m/n/10 = \OML/cmm/b/it/10 I[] []
  []
 
+[2] [3] <Images/simple_zfree/3d.png, id=140, 649.67719pt x 362.10281pt>
+File: Images/simple_zfree/3d.png Graphic file (type png)
 
-Underfull \vbox (badness 1997) has occurred while \output is active []
+<use Images/simple_zfree/3d.png>
+Package pdftex.def Info: Images/simple_zfree/3d.png used on input line 389.
+(pdftex.def)             Requested size: 245.71811pt x 136.94852pt.
 
- [2]
-[3] (./root.bbl)
+<Images/simple_zfree/pos_vel.png, id=141, 655.69969pt x 368.1253pt>
+File: Images/simple_zfree/pos_vel.png Graphic file (type png)
+
+<use Images/simple_zfree/pos_vel.png>
+Package pdftex.def Info: Images/simple_zfree/pos_vel.png used on input line 395
+.
+(pdftex.def)             Requested size: 245.71811pt x 137.95116pt.
+
+<Images/simple_zfree/orient_rates.png, id=142, 642.14906pt x 360.59718pt>
+File: Images/simple_zfree/orient_rates.png Graphic file (type png)
+
+<use Images/simple_zfree/orient_rates.png>
+Package pdftex.def Info: Images/simple_zfree/orient_rates.png used on input lin
+e 401.
+(pdftex.def)             Requested size: 245.71811pt x 137.98024pt.
+
+<Images/simple_zfree/controls.png, id=143, 647.41875pt x 359.84438pt>
+File: Images/simple_zfree/controls.png Graphic file (type png)
+
+<use Images/simple_zfree/controls.png>
+Package pdftex.def Info: Images/simple_zfree/controls.png used on input line 40
+7.
+(pdftex.def)             Requested size: 245.71811pt x 136.57207pt.
+
+<Images/simple_zconstr/3d.png, id=146, 596.98032pt x 383.93437pt>
+File: Images/simple_zconstr/3d.png Graphic file (type png)
+
+<use Images/simple_zconstr/3d.png>
+Package pdftex.def Info: Images/simple_zconstr/3d.png used on input line 420.
+(pdftex.def)             Requested size: 245.71811pt x 158.02924pt.
+ [4 <./Images/simple_zfree/3d.png (PNG copy)> <./Images/simple_zfree/pos_vel.pn
+g (PNG copy)> <./Images/simple_zfree/orient_rates.png (PNG copy)>]
+<Images/simple_zconstr/pos_vel.png, id=161, 666.99188pt x 357.58594pt>
+File: Images/simple_zconstr/pos_vel.png Graphic file (type png)
+
+<use Images/simple_zconstr/pos_vel.png>
+Package pdftex.def Info: Images/simple_zconstr/pos_vel.png used on input line 4
+26.
+(pdftex.def)             Requested size: 245.71811pt x 131.7318pt.
+
+<Images/simple_zconstr/orient_rates.png, id=162, 662.475pt x 357.58594pt>
+File: Images/simple_zconstr/orient_rates.png Graphic file (type png)
+
+<use Images/simple_zconstr/orient_rates.png>
+Package pdftex.def Info: Images/simple_zconstr/orient_rates.png used on input l
+ine 432.
+(pdftex.def)             Requested size: 245.71811pt x 132.6321pt.
+
+<Images/simple_zconstr/controls.png, id=163, 663.22781pt x 353.06906pt>
+File: Images/simple_zconstr/controls.png Graphic file (type png)
+
+<use Images/simple_zconstr/controls.png>
+Package pdftex.def Info: Images/simple_zconstr/controls.png used on input line 
+438.
+(pdftex.def)             Requested size: 245.71811pt x 130.8059pt.
+
+<Images/final_race/3d.png, id=168, 535.2497pt x 413.29407pt>
+File: Images/final_race/3d.png Graphic file (type png)
+
+<use Images/final_race/3d.png>
+Package pdftex.def Info: Images/final_race/3d.png used on input line 470.
+(pdftex.def)             Requested size: 245.71811pt x 189.73288pt.
+
+<Images/final_race/pos_vel.png, id=169, 724.95844pt x 350.81062pt>
+File: Images/final_race/pos_vel.png Graphic file (type png)
+
+<use Images/final_race/pos_vel.png>
+Package pdftex.def Info: Images/final_race/pos_vel.png used on input line 476.
+(pdftex.def)             Requested size: 245.71811pt x 118.89932pt.
+
+<Images/final_race/orient_rates.png, id=170, 729.47531pt x 331.2375pt>
+File: Images/final_race/orient_rates.png Graphic file (type png)
+
+<use Images/final_race/orient_rates.png>
+Package pdftex.def Info: Images/final_race/orient_rates.png used on input line 
+482.
+(pdftex.def)             Requested size: 245.71811pt x 111.57301pt.
+
+<Images/final_race/controls.png, id=171, 747.54282pt x 511.15968pt>
+File: Images/final_race/controls.png Graphic file (type png)
+
+<use Images/final_race/controls.png>
+Package pdftex.def Info: Images/final_race/controls.png used on input line 488.
+
+(pdftex.def)             Requested size: 245.71811pt x 168.02023pt.
+ (./root.bbl
+
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
+
+[5 <./Images/simple_zfree/controls.png (PNG copy)> <./Images/simple_zconstr/3d.
+png (PNG copy)> <./Images/simple_zconstr/pos_vel.png (PNG copy)> <./Images/simp
+le_zconstr/orient_rates.png (PNG copy)> <./Images/simple_zconstr/controls.png (
+PNG copy)>]
+Overfull \vbox (21.89168pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (72.24576pt too high) has occurred while \output is active []
+
+
+[6 <./Images/final_race/pos_vel.png (PNG copy)> <./Images/final_race/orient_rat
+es.png (PNG copy)> <./Images/final_race/controls.png (PNG copy)> <./Images/fina
+l_race/3d.png (PNG copy)>]
+Underfull \hbox (badness 1515) in paragraph at lines 16--20
+[]\OT1/ptm/m/n/8 Sunggoo Jung, Sung-wook Cho, Da-sol Lee, Hanseob Lee, and
+ []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -401,37 +539,28 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 429.
-[4pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 525.
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.429 \end{document}
-                    ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 429.
+Overfull \vbox (0.95189pt too high) has occurred while \output is active []
+
+
+[7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 525.
  (./root.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 429.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 429.
-
-
-Package rerunfilecheck Warning: File `root.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `root.out':
-(rerunfilecheck)             Before: 1C4F0291E05A191D0FA71CA0E6FFFECB;1044
-(rerunfilecheck)             After:  F7FC6984F39FBCF9219CBEDC6BDD3D95;1241.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 429.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 525.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 525.
+Package rerunfilecheck Info: File `root.out' has not changed.
+(rerunfilecheck)             Checksum: C0B43B86DB5AF031E47E040F6D1FDC02;1320.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 525.
  ) 
 Here is how much of TeX's memory you used:
- 6092 strings out of 493029
- 92262 string characters out of 6136233
- 200681 words of memory out of 5000000
- 9509 multiletter control sequences out of 15000+600000
- 51431 words of font info for 120 fonts, out of 8000000 for 9000
+ 7217 strings out of 493029
+ 113655 string characters out of 6136233
+ 215484 words of memory out of 5000000
+ 10598 multiletter control sequences out of 15000+600000
+ 50785 words of font info for 119 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,14n,28p,715b,314s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,14n,39p,1037b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf
@@ -455,10 +584,10 @@ r8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (4 pages, 406963 bytes).
+Output written on root.pdf (7 pages, 748362 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 193 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 297 PDF objects out of 1000 (max. 8388607)
+ 248 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 226 words of extra memory for PDF output out of 10000 (max. 10000000)
 
