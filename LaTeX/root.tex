@@ -59,7 +59,7 @@ Optimal Control for Autonomous Drone Racing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TODO: use bm instead of boldsymbol
-% TODO: cite GPOPS guide and files under "Literature"
+% TODO: cite refs in "Literature"
 % TODO: show all images in the folder
 % TODO: MORE dynamics references
 % TODO: make video, add to rar, and add as well the script and world used. Add README explaining that you need a ROS package (do you, actually?), and I used ACL's.
@@ -331,9 +331,9 @@ To specify the gate constraints, the program is divided in $n_{gates}$ phases. T
 \subsection{Main Function}
 In this function, the race and drone parameters are loaded, the program is set up and the bounds and guesses are specified:
 \begin{itemize}
-	\item \textbf{Bounds:} the bounds limit the states and controls allowed for each phase. The time, position, velocity, orientation and rates are limited to realistic values, although the quadrotor could technically surpass them. For example, this work does not allow the drone to fly upside down or faster than 50 $m/s$. As for the control inputs, they are limited to the allowed values as shown in Subsection~\ref{subs:math_form}.
+	\item \textbf{Bounds:} the bounds limit the states and controls allowed for each phase. The time, position, velocity, orientation and rates are limited to realistic values, although the quadrotor could technically surpass them. For example, this work does not allow the drone to fly faster than 50 $m/s$. As for the control inputs, they are limited to the allowed values as shown in Subsection~\ref{subs:math_form}.
 	
-	Additionally, the z is limited to values greater than 0 to avoid the drone crashing into the ground, the initial state is set to 0, the difference of states in contiguous phases is set to 0 and the final position for each phase is set to the corresponding gate.
+	Additionally, the z is limited to values greater than 0 to avoid the drone crashing into the ground, the initial state is set to 0, the difference of states in contiguous phases is set to 0 and the final position for each phase is set to the corresponding gate. To avoid having redundant constraints, the initial positions of each phase are not set to the previous gate.
 	\item \textbf{Guesses:} they set values to the time, state and control for each phase to help the algorithm converge.
 \end{itemize}
 
@@ -349,20 +349,56 @@ The endpoint function returns the objective function, which is the final time of
 
 \subsection{Video Functions}
 
-To make the video of the drone performing the race...
+To make the video of the drone performing the race, the time, position and orientation vectors obtained with GPOPS were saved to an Excel file, which was read by a Python script. Using ROS \cite{quigley2009ros}, the script publishes topics from which Gazebo \cite{koenig2004design} (a simulation environment for ROS) is subscribed. These topics include the position and orientation of the drone, and are published with a period that matches the time difference of every point. A quadrotor model in Gazebo receives the ROS messages and moves and rotates as they indicate, thus giving the impression that the drone is moving. Cuboids were added to the environment to represent the gates.
 
 
 \section{RESULTS}\label{s:res}
 
-\subsection{Drone Parameters}
-A
+\subsection{Quadrotor Parameters}
+
+The following quadrotor parameters were used:
+
+\begin{table}[!htpb]
+	\caption[Quadrotor parameters]{\bf Quadrotor parameters}
+	\label{tbl:drone-params}
+	\centering
+	\def\arraystretch{1.3}
+	\setlength{\tabcolsep}{3pt}
+	\begin{tabular}{ccc}
+		%\specialrule{.1em}{.05em}{.00em} 
+		%\rowcolor{Gray}
+		\textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\ 
+		\hline
+		Mass & 1.1 & $kg$ \\
+		$I_{xx}$  & 0.03 & $kg \cdot m^2$  \\
+		$I_{yy}$  & 0.03 & $kg \cdot m^2$  \\
+		$I_{zz}$  & 0.16 & $kg \cdot m^2$  \\
+		$A_x$     & 0.10 & $kg / s$  \\
+		$A_y$     & 0.10 & $kg / s$  \\
+		$A_z$     & 0.20 & $kg / s$  \\
+		$T_{max}$ & 25   & $N$  \\
+		$\tau_{\phi, max}$   & 5    & $-$  \\  % TODO
+		$\tau_{\theta, max}$ & 5    & $-$  \\
+		$\tau_{\psi, max}$   & 1.5  & $-$  \\		
+	%	\specialrule{.1em}{.05em}{.00em} 
+	\end{tabular}
+\end{table}
 
 \subsection{Experiments}
 
+\subsubsection{Simple experiment without the z constraint}
+A
+
+\subsubsection{Simple experiment with z constraint}
+
+A
+
+\subsubsection{Complex experiment}
+
+A
+
 Show simple experiment with/out considering z constraint. Show gates.
-
 Show gates and plots of final experiment.
-
 The video can be found in ...
 
 \section{CONCLUSIONS}\label{s:conclusions}
@@ -378,10 +414,6 @@ Copy abstract... Future work could impose additional gate constraints such as li
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{APPENDIX}
-
-Nothing...
-
 %%%%%%%%%%%%%%%%%%% CHECK BIB MANUAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{thebibliography}{99}
 

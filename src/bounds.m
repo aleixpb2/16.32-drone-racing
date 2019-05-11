@@ -10,9 +10,9 @@ vel_min = ones(1, 3)*-50;
 vel_max = -vel_min;
 
 % Orientation in rad
-phi_min = -80*pi/180;
+phi_min = -89*pi/180;
 phi_max = -phi_min;
-theta_min = -80*pi/180;
+theta_min = -89*pi/180;
 theta_max = -theta_min;
 psi_min = -179*pi/180;
 psi_max = -psi_min;

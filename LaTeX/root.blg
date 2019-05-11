@@ -6,45 +6,46 @@ Database file #1: IEEEexample.bib
 Warning--string name "ieee_j_edl" is undefined
 --line 333 of file IEEEexample.bib
 Warning--empty journal in IEEEexample:article_typical
-You've used 3 entries,
+Warning--can't use both volume and number fields in quigley2009ros
+You've used 5 entries,
             1791 wiz_defined-function locations,
-            462 strings with 4102 characters,
-and the built_in function-call counts, 581 in all, are:
-= -- 43
-> -- 30
-< -- 0
-+ -- 11
-- -- 8
-* -- 39
-:= -- 100
-add.period$ -- 8
-call.type$ -- 3
-change.case$ -- 3
+            477 strings with 4592 characters,
+and the built_in function-call counts, 1329 in all, are:
+= -- 112
+> -- 64
+< -- 4
++ -- 23
+- -- 18
+* -- 91
+:= -- 203
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 5
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 23
-empty$ -- 60
-format.name$ -- 8
-if$ -- 125
+cite$ -- 7
+duplicate$ -- 61
+empty$ -- 128
+format.name$ -- 18
+if$ -- 306
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 2
-newline$ -- 17
-num.names$ -- 3
-pop$ -- 11
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 27
+num.names$ -- 5
+pop$ -- 21
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 12
+skip$ -- 36
 stack$ -- 0
-substring$ -- 24
-swap$ -- 2
-text.length$ -- 0
+substring$ -- 66
+swap$ -- 23
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 5
-width$ -- 4
-write$ -- 31
-(There were 2 warnings)
+warning$ -- 2
+while$ -- 11
+width$ -- 6
+write$ -- 57
+(There were 3 warnings)

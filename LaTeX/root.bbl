@@ -18,4 +18,19 @@ Michael~A Patterson and Anil~V Rao.
 \newblock {GPOPS-II}: A general-purpose {MATLAB} software for solving
   multiple-phase optimal control problems, 2016.
 
+\bibitem{quigley2009ros}
+Morgan Quigley, Ken Conley, Brian Gerkey, Josh Faust, Tully Foote, Jeremy
+  Leibs, Rob Wheeler, and Andrew~Y Ng.
+\newblock Ros: an open-source robot operating system.
+\newblock In {\em ICRA workshop on open source software}, volume~3, page~5.
+  Kobe, Japan, 2009.
+
+\bibitem{koenig2004design}
+Nathan Koenig and Andrew Howard.
+\newblock Design and use paradigms for gazebo, an open-source multi-robot
+  simulator.
+\newblock In {\em 2004 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)(IEEE Cat. No. 04CH37566)}, volume~3, pages 2149--2154.
+  IEEE, 2004.
+
 \end{thebibliography}
